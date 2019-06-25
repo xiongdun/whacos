@@ -4,8 +4,11 @@ import (
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	"whacos/controller/api"
-	"whacos/controller/sys"
+	"whacos/controller/c_file"
+	"whacos/controller/c_index"
+	"whacos/controller/c_menu"
+	"whacos/controller/c_role"
+	"whacos/controller/c_user"
 	_ "whacos/docs"
 	"whacos/middleware/jwt"
 	"whacos/pkg/settings"
@@ -25,56 +28,56 @@ func InitRouter() *gin.Engine {
 	// 设置页面地址
 	router.LoadHTMLGlob("templates/*")
 	// 首页
-	router.GET("/", sys.Index)
+	router.GET("/", c_index.Index)
 	// jwt token 校验
-	router.POST("/auth", api.GetAuth)
+	router.POST("/auth", c_user.GetAuth)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	router.GET("/login", sys.ToLogin)
-	router.POST("/login", sys.Login)
+	router.GET("/login", c_index.ToLogin)
+	router.POST("/login", c_index.Login)
 
-	appApi := router.Group("/api")
+	appApi := router.Group("/app")
 	appApi.Use(jwt.ValidJWT())
 	{
-		appApi.GET("/file/upload", api.UploadFile)
+		appApi.GET("/file/upload", c_file.UploadFile)
 	}
 
 	sysUser := router.Group("/sys/user")
 	{
-		sysUser.GET("/get/:id", sys.GetUser)
+		sysUser.GET("/get/:id", c_user.GetUser)
 
-		sysUser.POST("/list", sys.ListUser)
+		sysUser.POST("/list", c_user.ListUser)
 
-		sysUser.POST("/add", sys.AddUser)
+		sysUser.POST("/add", c_user.AddUser)
 
-		sysUser.PUT("/edit/:id", sys.EditUser)
+		sysUser.PUT("/edit/:id", c_user.EditUser)
 
-		sysUser.DELETE("/remove/:id", sys.RemoveUser)
+		sysUser.DELETE("/remove/:id", c_user.RemoveUser)
 	}
 	// 角色
 	sysRole := router.Group("/sys/role")
 	{
-		sysRole.GET("/get", sys.GetRole)
+		sysRole.GET("/get", c_role.GetRole)
 
-		sysRole.POST("/list", sys.ListRole)
+		sysRole.POST("/list", c_role.ListRole)
 
-		sysRole.POST("/add", sys.AddRole)
+		sysRole.POST("/add", c_role.AddRole)
 
-		sysRole.PUT("/edit", sys.EditRole)
+		sysRole.PUT("/edit", c_role.EditRole)
 
-		sysRole.DELETE("/remove", sys.RemoveRole)
+		sysRole.DELETE("/remove", c_role.RemoveRole)
 	}
 	// 菜单
 	sysMenu := router.Group("/sys/menu")
 	{
-		sysMenu.GET("/get", sys.GetMenu)
+		sysMenu.GET("/get", c_menu.GetMenu)
 
-		sysMenu.POST("/list", sys.ListMenu)
+		sysMenu.POST("/list", c_menu.ListMenu)
 
-		sysMenu.POST("/add", sys.AddMenu)
+		sysMenu.POST("/add", c_menu.AddMenu)
 
-		sysMenu.PUT("/edit", sys.EditMenu)
+		sysMenu.PUT("/edit", c_menu.EditMenu)
 
-		sysMenu.DELETE("/remove", sys.RemoveMenu)
+		sysMenu.DELETE("/remove", c_menu.RemoveMenu)
 	}
 
 	return router

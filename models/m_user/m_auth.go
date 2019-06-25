@@ -1,4 +1,4 @@
-package user_model
+package m_user
 
 type Auth struct {
 	Id int `json:"id" gorm:"primary_key"`

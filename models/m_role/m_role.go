@@ -1,7 +1,7 @@
-package menu_model
+package m_role
 
 import "whacos/models"
 
-type Menu struct {
+type Role struct {
 	models.Model
 }

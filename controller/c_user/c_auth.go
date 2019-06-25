@@ -1,10 +1,10 @@
-package api
+package c_user
 
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"whacos/models/user_model"
+	"whacos/models/m_user"
 	"whacos/pkg/err"
 	"whacos/pkg/logging"
 	"whacos/pkg/utils"
@@ -33,7 +33,7 @@ func GetAuth(c *gin.Context) {
 	data := make(map[string]interface{})
 	code := err.InvalidParams
 	if ok {
-		isExist := user_model.CheckAuth(username, password)
+		isExist := m_user.CheckAuth(username, password)
 		if isExist {
 			token, e := utils.GenerateToken(username, password)
 			if e != nil {

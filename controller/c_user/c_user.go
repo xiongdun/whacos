@@ -1,4 +1,4 @@
-package sys
+package c_user
 
 import (
 	"github.com/Unknwon/com"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 	"whacos/models"
-	"whacos/models/user_model"
+	"whacos/models/m_user"
 	"whacos/pkg/err"
 )
 
@@ -28,7 +28,7 @@ func GetUser(c *gin.Context) {
 	valid.Min(id, 1, "id").Message("Id必须大于0！")
 
 	// 查询
-	user := user_model.SelectUserById(id)
+	user := m_user.SelectUserById(id)
 
 	// 返回
 	c.JSON(http.StatusOK, gin.H{
@@ -42,7 +42,7 @@ func ListUser(c *gin.Context) {
 
 	maps := make(map[string]interface{})
 	//maps["status"] = 1
-	userList := user_model.SelectUserList(1, 20, maps)
+	userList := m_user.SelectUserList(1, 20, maps)
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": err.Success,
@@ -65,7 +65,7 @@ func AddUser(c *gin.Context) {
 	valid.Required(sex, "sex").Message("性别不能位空！")
 	valid.Required(birth, "birth").Message("出身日期不能位空！")
 
-	user := &user_model.User{
+	user := &m_user.User{
 		Username: username,
 		Email:    email,
 		IdCard:   idCard,
@@ -80,7 +80,7 @@ func AddUser(c *gin.Context) {
 		},
 	}
 
-	result := user_model.InsertUser(user)
+	result := m_user.InsertUser(user)
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": err.Success,
@@ -108,7 +108,7 @@ func RemoveUser(c *gin.Context) {
 	valid.Required(id, "id").Message("Id不能为空！")
 	valid.Min(id, 1, "id").Message("Id必须大于0！")
 
-	isSuccess := user_model.DeleteUserById(id)
+	isSuccess := m_user.DeleteUserById(id)
 	c.JSON(http.StatusOK, gin.H{
 		"code": err.Success,
 		"msg":  "请求成功",

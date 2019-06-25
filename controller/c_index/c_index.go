@@ -1,4 +1,4 @@
-package sys
+package c_index
 
 import (
 	"fmt"

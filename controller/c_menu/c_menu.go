@@ -1,4 +1,4 @@
-package sys
+package c_menu
 
 import (
 	"github.com/gin-gonic/gin"
