@@ -1,0 +1,22 @@
+run_mode: debug # test debug release
+
+server:
+  http_port: 8090
+  read_timeout: 60
+  write_timeout: 60
+
+app:
+  page_size: 10
+
+jwt:
+  secret: 12012021010
+
+database:
+  dialect: mysql
+  host: 148.70.20.37:3306
+  name: whacos
+  username: root
+  password: Password123.
+  max_idle_conns: 10
+  max_open_conns: 100
+
