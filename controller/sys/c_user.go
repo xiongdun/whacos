@@ -7,10 +7,9 @@ import (
 	"net/http"
 	"time"
 	"whacos/models"
-	"whacos/models/sys"
+	"whacos/models/user_model"
 	"whacos/pkg/err"
 )
-
 
 // @Summary 按ID 获取用户
 // @Produce  json
@@ -29,7 +28,7 @@ func GetUser(c *gin.Context) {
 	valid.Min(id, 1, "id").Message("Id必须大于0！")
 
 	// 查询
-	user := sys.SelectUserById(id)
+	user := user_model.SelectUserById(id)
 
 	// 返回
 	c.JSON(http.StatusOK, gin.H{
@@ -43,7 +42,7 @@ func ListUser(c *gin.Context) {
 
 	maps := make(map[string]interface{})
 	//maps["status"] = 1
-	userList := sys.SelectUserList(1, 20, maps)
+	userList := user_model.SelectUserList(1, 20, maps)
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": err.Success,
@@ -66,7 +65,7 @@ func AddUser(c *gin.Context) {
 	valid.Required(sex, "sex").Message("性别不能位空！")
 	valid.Required(birth, "birth").Message("出身日期不能位空！")
 
-	user := &sys.User{
+	user := &user_model.User{
 		Username: username,
 		Email:    email,
 		IdCard:   idCard,
@@ -81,7 +80,7 @@ func AddUser(c *gin.Context) {
 		},
 	}
 
-	result := sys.InsertUser(user)
+	result := user_model.InsertUser(user)
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": err.Success,
@@ -94,6 +93,13 @@ func EditUser(c *gin.Context) {
 
 }
 
+// @Summary 移除指定用户
+// @Produce json
+// @Param query username body string true "username"
+// @Param query password body string true "password"
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /remove [DELETE]
 func RemoveUser(c *gin.Context) {
 	id, _ := com.StrTo(c.Param("id")).Int()
 
@@ -102,7 +108,7 @@ func RemoveUser(c *gin.Context) {
 	valid.Required(id, "id").Message("Id不能为空！")
 	valid.Min(id, 1, "id").Message("Id必须大于0！")
 
-	isSuccess := sys.DeleteUserById(id)
+	isSuccess := user_model.DeleteUserById(id)
 	c.JSON(http.StatusOK, gin.H{
 		"code": err.Success,
 		"msg":  "请求成功",

@@ -1,4 +1,4 @@
-package sys
+package menu_model
 
 import "whacos/models"
 

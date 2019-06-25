@@ -1,4 +1,4 @@
-package sys
+package user_model
 
 type Auth struct {
 	Id int `json:"id" gorm:"primary_key"`
