@@ -16,7 +16,7 @@ type auth struct {
 }
 
 // @Summary 校验用户并获取token 值
-// @Produce  json
+// @Produce json
 // @Param query username body string true "username"
 // @Param query password body string true "password"
 // @Success 200 {object} app.Response
