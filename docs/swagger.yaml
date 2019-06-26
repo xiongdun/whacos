@@ -1,4 +1,4 @@
-basePath: '{{.BasePath}}'
+basePath: /
 definitions:
   app.Response:
     properties:
@@ -9,13 +9,19 @@ definitions:
       msg:
         type: string
     type: object
-host: '{{.Host}}'
+host: 127.0.0.1:8090
 info:
-  contact: {}
-  description: '{{.Description}}'
-  license: {}
-  title: '{{.Title}}'
-  version: '{{.Version}}'
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API12222
+  version: "1.0"
 paths:
   /auth:
     post:
@@ -50,6 +56,8 @@ paths:
       summary: 校验用户并获取token 值
   /login:
     post:
+      consumes:
+      - application/json
       parameters:
       - description: username
         in: query
@@ -75,11 +83,42 @@ paths:
             $ref: '#/definitions/app.Response'
             type: object
       summary: 系统用户登录
-  /sys/user/get:
+  /sys/user/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: username
+        in: query
+        name: username
+        required: true
+        type: string
+      - description: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 新增用户
+  /sys/user/get/{id}:
     get:
+      consumes:
+      - application/json
       parameters:
       - description: id
-        in: query
+        in: path
         name: id
         required: true
         type: string
@@ -97,4 +136,57 @@ paths:
             $ref: '#/definitions/app.Response'
             type: object
       summary: 按ID 获取用户
+  /sys/user/list:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: username
+        in: query
+        name: username
+        required: true
+        type: string
+      - description: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 查询用户列表
+  /sys/user/remove/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 移除指定用户
 swagger: "2.0"

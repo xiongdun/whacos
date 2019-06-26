@@ -12,11 +12,12 @@ import (
 )
 
 // @Summary 按ID 获取用户
-// @Produce  json
-// @Param id query string true "id"
+// @Accept json
+// @Produce json
+// @Param id path string true "id"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
-// @Router /sys/user/get [GET]
+// @Router /sys/user/get/{id} [GET]
 func GetUser(c *gin.Context) {
 
 	// 取值
@@ -38,6 +39,14 @@ func GetUser(c *gin.Context) {
 	})
 }
 
+// @Summary 查询用户列表
+// @Accept json
+// @Produce json
+// @Param username query string true "username"
+// @Param password query string true "password"
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /sys/user/list [POST]
 func ListUser(c *gin.Context) {
 
 	maps := make(map[string]interface{})
@@ -51,6 +60,14 @@ func ListUser(c *gin.Context) {
 	})
 }
 
+// @Summary 新增用户
+// @Accept json
+// @Produce json
+// @Param username query string true "username"
+// @Param password query string true "password"
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /sys/user/add [POST]
 func AddUser(c *gin.Context) {
 	username := c.PostForm("username")
 	email := c.Query("email")
@@ -94,12 +111,12 @@ func EditUser(c *gin.Context) {
 }
 
 // @Summary 移除指定用户
+// @Accept json
 // @Produce json
-// @Param query username body string true "username"
-// @Param query password body string true "password"
+// @Param id path string true "id"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
-// @Router /remove [DELETE]
+// @Router /sys/user/remove/{id} [DELETE]
 func RemoveUser(c *gin.Context) {
 	id, _ := com.StrTo(c.Param("id")).Int()
 

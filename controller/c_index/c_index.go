@@ -22,6 +22,7 @@ func ToLogin(c *gin.Context) {
 }
 
 // @Summary 系统用户登录
+// @Accept json
 // @Produce  json
 // @Param username query string true "username"
 // @Param password query string true "password"
