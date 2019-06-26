@@ -9,6 +9,77 @@ definitions:
       msg:
         type: string
     type: object
+  c_index.LoginForm:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  c_user.AddUserForm:
+    properties:
+      email:
+        type: string
+      idCard:
+        type: string
+      mobile:
+        type: string
+      name:
+        type: string
+      sex:
+        type: string
+      username:
+        type: string
+    type: object
+  c_user.AuthForm:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  c_user.EditUserForm:
+    properties:
+      city:
+        type: string
+      deptId:
+        type: integer
+      district:
+        type: string
+      email:
+        type: string
+      hobby:
+        type: string
+      idCard:
+        type: string
+      liveAddress:
+        type: string
+      mobile:
+        type: string
+      name:
+        type: string
+      picId:
+        type: integer
+      province:
+        type: string
+      remarks:
+        type: string
+      sex:
+        type: integer
+      status:
+        type: integer
+      username:
+        type: string
+    type: object
+  c_user.ListUserForm:
+    properties:
+      idCard:
+        type: string
+      name:
+        type: string
+      username:
+        type: string
+    type: object
 host: 127.0.0.1:8090
 info:
   contact:
@@ -31,16 +102,21 @@ paths:
       parameters:
       - description: authForm
         in: body
-        name: authForm
+        name: auth
         required: true
         schema:
-          $ref: '#/definitions/json'
+          $ref: '#/definitions/c_user.AuthForm'
           type: object
       produces:
       - application/json
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.Response'
             type: object
@@ -64,6 +140,11 @@ paths:
           schema:
             $ref: '#/definitions/app.Response'
             type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
         "500":
           description: Internal Server Error
           schema:
@@ -79,16 +160,21 @@ paths:
       parameters:
       - description: loginForm
         in: body
-        name: loginForm
+        name: login
         required: true
         schema:
-          $ref: '#/definitions/string'
+          $ref: '#/definitions/c_index.LoginForm'
           type: object
       produces:
       - application/json
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.Response'
             type: object
@@ -105,21 +191,23 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: username
-        in: query
-        name: username
+      - description: addUserForm
+        in: body
+        name: addUser
         required: true
-        type: string
-      - description: password
-        in: query
-        name: password
-        required: true
-        type: string
+        schema:
+          $ref: '#/definitions/c_user.AddUserForm'
+          type: object
       produces:
       - application/json
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.Response'
             type: object
@@ -136,21 +224,23 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: username
-        in: query
-        name: username
+      - description: editUserForm
+        in: body
+        name: editUser
         required: true
-        type: string
-      - description: password
-        in: query
-        name: password
-        required: true
-        type: string
+        schema:
+          $ref: '#/definitions/c_user.EditUserForm'
+          type: object
       produces:
       - application/json
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.Response'
             type: object
@@ -180,6 +270,11 @@ paths:
           schema:
             $ref: '#/definitions/app.Response'
             type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
         "500":
           description: Internal Server Error
           schema:
@@ -193,21 +288,23 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: username
-        in: query
-        name: username
+      - description: listUserForm
+        in: body
+        name: listUser
         required: true
-        type: string
-      - description: password
-        in: query
-        name: password
-        required: true
-        type: string
+        schema:
+          $ref: '#/definitions/c_user.ListUserForm'
+          type: object
       produces:
       - application/json
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.Response'
             type: object
@@ -234,6 +331,11 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.Response'
             type: object

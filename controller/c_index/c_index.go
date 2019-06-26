@@ -17,6 +17,7 @@ type LoginForm struct {
 // @Accept json
 // @Produce json
 // @Success 200 {object} app.Response
+// @Failure 400 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /index [GET]
 func Index(c *gin.Context) {
@@ -34,8 +35,9 @@ func ToLogin(c *gin.Context) {
 // @Summary 用户登录
 // @Accept json
 // @Produce json
-// @Param loginForm body string true "loginForm"
+// @Param login body c_index.LoginForm true "loginForm"
 // @Success 200 {object} app.Response
+// @Failure 400 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /login [POST]
 func Login(c *gin.Context) {

@@ -1,13 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"os/signal"
-	"time"
 	"whacos/pkg/settings"
 	"whacos/routers"
 )
@@ -35,6 +31,10 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
+	if err := server.ListenAndServe(); err != nil {
+		log.Fatal(err)
+	}
+	/**
 	go func() {
 		if err := server.ListenAndServe(); err != nil {
 			log.Fatal(err)
@@ -54,4 +54,5 @@ func main() {
 	}
 
 	log.Println("Server exiting")
+	*/
 }

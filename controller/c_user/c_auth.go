@@ -22,8 +22,9 @@ type AuthForm struct {
 // @Description 通过 username 和 password 获取 token
 // @Accept json
 // @Produce json
-// @Param authForm body json true "authForm"
+// @Param auth body c_user.AuthForm true "authForm"
 // @Success 200 {object} app.Response
+// @Failure 400 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /auth [POST]
 func GetAuth(c *gin.Context) {

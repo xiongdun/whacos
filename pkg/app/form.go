@@ -7,6 +7,11 @@ import (
 	"whacos/pkg/e"
 )
 
+type CommonForm struct {
+	PageNum  int `json:"pageNum" valid:"Required MinSize(1)"`
+	PageSize int `json:"pageSize" valid:"Required MinSize(1)"`
+}
+
 // BindAndValid binds and validates data
 func BindAndValid(c *gin.Context, form interface{}) (int, int) {
 	err := c.Bind(form)
