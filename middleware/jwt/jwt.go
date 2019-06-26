@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
-	"whacos/pkg/err"
+	"whacos/pkg/e"
 	"whacos/pkg/utils"
 )
 
@@ -14,24 +14,24 @@ func ValidJWT() gin.HandlerFunc {
 		var code int
 		var data interface{}
 
-		code = err.Success
+		code = e.Success
 		token := context.Query("token")
 
 		if token == "" {
-			code = err.InvalidParams
+			code = e.InvalidParams
 		} else {
-			claims, e := utils.ParseToken(token)
-			if e != nil {
-				code = err.ErrorAuthCheckTokenFail
+			claims, err := utils.ParseToken(token)
+			if err != nil {
+				code = e.ErrorAuthCheckTokenFail
 			} else if time.Now().Unix() > claims.ExpiresAt {
-				code = err.ErrorAuthCheckTokenTimeout
+				code = e.ErrorAuthCheckTokenTimeout
 			}
 		}
 
-		if code != err.Success {
+		if code != e.Success {
 			context.JSON(http.StatusUnauthorized, gin.H{
 				"code": code,
-				"msg":  err.GetMsg(code),
+				"msg":  e.GetMsg(code),
 				"data": data,
 			})
 			context.Abort()

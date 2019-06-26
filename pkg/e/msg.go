@@ -1,4 +1,4 @@
-package err
+package e
 
 var MsgFlags = map[int]string{
 	Success:                    "请求成功！",

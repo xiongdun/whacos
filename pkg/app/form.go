@@ -4,25 +4,25 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"whacos/pkg/err"
+	"whacos/pkg/e"
 )
 
 // BindAndValid binds and validates data
 func BindAndValid(c *gin.Context, form interface{}) (int, int) {
-	e := c.Bind(form)
-	if e != nil {
-		return http.StatusBadRequest, err.Success
+	err := c.Bind(form)
+	if err != nil {
+		return http.StatusBadRequest, e.Success
 	}
 
 	valid := validation.Validation{}
-	check, e := valid.Valid(form)
-	if e != nil {
-		return http.StatusInternalServerError, err.Error
+	check, err := valid.Valid(form)
+	if err != nil {
+		return http.StatusInternalServerError, e.Error
 	}
 	if !check {
 		MarkErrors(valid.Errors)
-		return http.StatusBadRequest, err.InvalidParams
+		return http.StatusBadRequest, e.InvalidParams
 	}
 
-	return http.StatusOK, err.Success
+	return http.StatusOK, e.Success
 }

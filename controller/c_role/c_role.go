@@ -3,7 +3,7 @@ package c_role
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"whacos/pkg/err"
+	"whacos/pkg/e"
 )
 
 func GetRole(c *gin.Context) {
@@ -12,7 +12,7 @@ func GetRole(c *gin.Context) {
 
 func ListRole(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"code": err.Success,
+		"code": e.Success,
 		"msg":  "请求成功",
 	})
 }

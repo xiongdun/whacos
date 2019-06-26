@@ -8,9 +8,11 @@ import (
 	"time"
 	"whacos/models"
 	"whacos/models/m_user"
-	"whacos/pkg/err"
+	"whacos/pkg/e"
 )
 
+// @Tags 用户相关
+// @Resource Name
 // @Summary 按ID 获取用户
 // @Accept json
 // @Produce json
@@ -33,12 +35,14 @@ func GetUser(c *gin.Context) {
 
 	// 返回
 	c.JSON(http.StatusOK, gin.H{
-		"code": err.Success,
+		"code": e.Success,
 		"msg":  "请求成功！",
 		"data": user,
 	})
 }
 
+// @Tags 用户相关
+// @Resource Name
 // @Summary 查询用户列表
 // @Accept json
 // @Produce json
@@ -54,12 +58,14 @@ func ListUser(c *gin.Context) {
 	userList := m_user.SelectUserList(1, 20, maps)
 
 	c.JSON(http.StatusOK, gin.H{
-		"code": err.Success,
+		"code": e.Success,
 		"msg":  "请求成功",
 		"data": userList,
 	})
 }
 
+// @Tags 用户相关
+// @Resource Name
 // @Summary 新增用户
 // @Accept json
 // @Produce json
@@ -100,16 +106,28 @@ func AddUser(c *gin.Context) {
 	result := m_user.InsertUser(user)
 
 	c.JSON(http.StatusOK, gin.H{
-		"code": err.Success,
+		"code": e.Success,
 		"msg":  "请求成功",
 		"data": result,
 	})
 }
 
+// @Tags 用户相关
+// @Resource Name
+// @Summary 修改用户信息
+// @Accept json
+// @Produce json
+// @Param username query string true "username"
+// @Param password query string true "password"
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /sys/user/edit [PUT]
 func EditUser(c *gin.Context) {
 
 }
 
+// @Tags 用户相关
+// @Resource Name
 // @Summary 移除指定用户
 // @Accept json
 // @Produce json
@@ -127,7 +145,7 @@ func RemoveUser(c *gin.Context) {
 
 	isSuccess := m_user.DeleteUserById(id)
 	c.JSON(http.StatusOK, gin.H{
-		"code": err.Success,
+		"code": e.Success,
 		"msg":  "请求成功",
 		"data": isSuccess,
 	})

@@ -11,6 +11,14 @@ type LoginForm struct {
 	Password string `form:"password" json:"password" binding:"required"`
 }
 
+// @Tags DEFAULT
+// @Resource Name
+// @Summary 跳转到首页
+// @Accept json
+// @Produce json
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /index [GET]
 func Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"title": "Main website",
@@ -21,9 +29,11 @@ func ToLogin(c *gin.Context) {
 
 }
 
-// @Summary 系统用户登录
+// @Tags DEFAULT
+// @Resource Name
+// @Summary 用户登录
 // @Accept json
-// @Produce  json
+// @Produce json
 // @Param username query string true "username"
 // @Param password query string true "password"
 // @Success 200 {object} app.Response

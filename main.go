@@ -12,18 +12,15 @@ import (
 	"whacos/routers"
 )
 
-// @title Swagger Example API12222
+// @title Swagger For Project Whacos
 // @version 1.0
-// @description This is a sample server Petstore server.
+// @description This is a api server for project whacos .
 // @termsOfService http://swagger.io/terms/
-
-// @contact.name API Support
+// @contact.name API 接口
 // @contact.url http://www.swagger.io/support
 // @contact.email support@swagger.io
-
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-
 // @host 127.0.0.1:8090
 // @BasePath /
 func main() {

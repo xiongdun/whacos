@@ -3,7 +3,7 @@ package c_menu
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"whacos/pkg/err"
+	"whacos/pkg/e"
 )
 
 func GetMenu(c *gin.Context) {
@@ -12,7 +12,7 @@ func GetMenu(c *gin.Context) {
 
 func ListMenu(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"code": err.Success,
+		"code": e.Success,
 		"msg":  "请求成功",
 	})
 }

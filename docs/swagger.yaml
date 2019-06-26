@@ -13,32 +13,28 @@ host: 127.0.0.1:8090
 info:
   contact:
     email: support@swagger.io
-    name: API Support
+    name: API 接口
     url: http://www.swagger.io/support
-  description: This is a sample server Petstore server.
+  description: This is a api server for project whacos .
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: Swagger Example API12222
+  title: Swagger For Project Whacos
   version: "1.0"
 paths:
   /auth:
     post:
+      consumes:
+      - application/json
+      description: 通过 username 和 password 获取 token
       parameters:
-      - description: username
+      - description: AuthForm
         in: body
-        name: username
+        name: authForm
         required: true
         schema:
-          $ref: '#/definitions/string'
-          type: object
-      - description: password
-        in: body
-        name: password
-        required: true
-        schema:
-          $ref: '#/definitions/string'
+          $ref: '#/definitions/json'
           type: object
       produces:
       - application/json
@@ -54,6 +50,28 @@ paths:
             $ref: '#/definitions/app.Response'
             type: object
       summary: 校验用户并获取token 值
+      tags:
+      - DEFAULT
+  /index:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 跳转到首页
+      tags:
+      - DEFAULT
   /login:
     post:
       consumes:
@@ -82,7 +100,9 @@ paths:
           schema:
             $ref: '#/definitions/app.Response'
             type: object
-      summary: 系统用户登录
+      summary: 用户登录
+      tags:
+      - DEFAULT
   /sys/user/add:
     post:
       consumes:
@@ -112,6 +132,39 @@ paths:
             $ref: '#/definitions/app.Response'
             type: object
       summary: 新增用户
+      tags:
+      - 用户相关
+  /sys/user/edit:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: username
+        in: query
+        name: username
+        required: true
+        type: string
+      - description: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 修改用户信息
+      tags:
+      - 用户相关
   /sys/user/get/{id}:
     get:
       consumes:
@@ -136,6 +189,8 @@ paths:
             $ref: '#/definitions/app.Response'
             type: object
       summary: 按ID 获取用户
+      tags:
+      - 用户相关
   /sys/user/list:
     post:
       consumes:
@@ -165,6 +220,8 @@ paths:
             $ref: '#/definitions/app.Response'
             type: object
       summary: 查询用户列表
+      tags:
+      - 用户相关
   /sys/user/remove/{id}:
     delete:
       consumes:
@@ -189,4 +246,6 @@ paths:
             $ref: '#/definitions/app.Response'
             type: object
       summary: 移除指定用户
+      tags:
+      - 用户相关
 swagger: "2.0"

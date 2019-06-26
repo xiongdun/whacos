@@ -1,4 +1,4 @@
-package err
+package e
 
 const (
 	Success       = 200

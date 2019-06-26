@@ -1,62 +1,68 @@
 package c_user
 
 import (
+	"fmt"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"whacos/models/m_user"
-	"whacos/pkg/err"
+	"whacos/pkg/e"
 	"whacos/pkg/logging"
 	"whacos/pkg/utils"
 )
 
-type auth struct {
+type AuthForm struct {
 	Username string `valid:"Required; MaxSize(50)"`
 	Password string `valid:"Required; MaxSize(50)"`
 }
 
+// @Tags DEFAULT
+// @Resource Name
 // @Summary 校验用户并获取token 值
+// @Description 通过 username 和 password 获取 token
+// @Accept json
 // @Produce json
-// @Param query username body string true "username"
-// @Param query password body string true "password"
+// @Param authForm body json true "AuthForm"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /auth [POST]
 func GetAuth(c *gin.Context) {
-	username := c.Query("username")
-	password := c.Query("password")
 
+	a := AuthForm{}
+	y := c.BindJSON(&a)
+	if y != nil {
+		fmt.Println(y)
+	}
 	valid := validation.Validation{}
-	a := auth{Username: username, Password: password}
 
 	ok, _ := valid.Valid(&a)
 	data := make(map[string]interface{})
-	code := err.InvalidParams
+	code := e.InvalidParams
 	if ok {
-		isExist := m_user.CheckAuth(username, password)
+		isExist := m_user.CheckAuth(a.Username, a.Password)
 		if isExist {
-			token, e := utils.GenerateToken(username, password)
-			if e != nil {
-				code = err.ErrorAuthToken
+			token, err := utils.GenerateToken(a.Username, a.Password)
+			if err != nil {
+				code = e.ErrorAuthToken
 			} else {
 				data["token"] = token
 
-				code = err.Success
+				code = e.Success
 			}
 		} else {
-			code = err.ErrorAuth
+			code = e.ErrorAuth
 		}
 	} else {
-		for _, e := range valid.Errors {
+		for _, err := range valid.Errors {
 			//log.Println(e.Key, e.Message)
 
-			logging.Info(e.Key, e.Message)
+			logging.Info(err.Key, err.Message)
 		}
 	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
-		"msg":  err.GetMsg(code),
+		"msg":  e.GetMsg(code),
 		"data": data,
 	})
 }
