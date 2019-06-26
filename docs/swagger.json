@@ -33,7 +33,7 @@
                 "summary": "校验用户并获取token 值",
                 "parameters": [
                     {
-                        "description": "AuthForm",
+                        "description": "authForm",
                         "name": "authForm",
                         "in": "body",
                         "required": true,
@@ -105,18 +105,14 @@
                 "summary": "用户登录",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "username",
-                        "name": "username",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "password",
-                        "name": "password",
-                        "in": "query",
-                        "required": true
+                        "description": "loginForm",
+                        "name": "loginForm",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/string"
+                        }
                     }
                 ],
                 "responses": {
@@ -146,7 +142,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "用户相关"
+                    "系统用户相关"
                 ],
                 "summary": "新增用户",
                 "parameters": [
@@ -192,7 +188,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "用户相关"
+                    "系统用户相关"
                 ],
                 "summary": "修改用户信息",
                 "parameters": [
@@ -238,7 +234,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "用户相关"
+                    "系统用户相关"
                 ],
                 "summary": "按ID 获取用户",
                 "parameters": [
@@ -277,7 +273,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "用户相关"
+                    "系统用户相关"
                 ],
                 "summary": "查询用户列表",
                 "parameters": [
@@ -323,7 +319,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "用户相关"
+                    "系统用户相关"
                 ],
                 "summary": "移除指定用户",
                 "parameters": [

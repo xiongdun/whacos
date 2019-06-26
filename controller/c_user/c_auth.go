@@ -22,7 +22,7 @@ type AuthForm struct {
 // @Description 通过 username 和 password 获取 token
 // @Accept json
 // @Produce json
-// @Param authForm body json true "AuthForm"
+// @Param authForm body json true "authForm"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /auth [POST]

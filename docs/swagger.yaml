@@ -29,7 +29,7 @@ paths:
       - application/json
       description: 通过 username 和 password 获取 token
       parameters:
-      - description: AuthForm
+      - description: authForm
         in: body
         name: authForm
         required: true
@@ -77,16 +77,13 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: username
-        in: query
-        name: username
+      - description: loginForm
+        in: body
+        name: loginForm
         required: true
-        type: string
-      - description: password
-        in: query
-        name: password
-        required: true
-        type: string
+        schema:
+          $ref: '#/definitions/string'
+          type: object
       produces:
       - application/json
       responses:
@@ -133,7 +130,7 @@ paths:
             type: object
       summary: 新增用户
       tags:
-      - 用户相关
+      - 系统用户相关
   /sys/user/edit:
     put:
       consumes:
@@ -164,7 +161,7 @@ paths:
             type: object
       summary: 修改用户信息
       tags:
-      - 用户相关
+      - 系统用户相关
   /sys/user/get/{id}:
     get:
       consumes:
@@ -190,7 +187,7 @@ paths:
             type: object
       summary: 按ID 获取用户
       tags:
-      - 用户相关
+      - 系统用户相关
   /sys/user/list:
     post:
       consumes:
@@ -221,7 +218,7 @@ paths:
             type: object
       summary: 查询用户列表
       tags:
-      - 用户相关
+      - 系统用户相关
   /sys/user/remove/{id}:
     delete:
       consumes:
@@ -247,5 +244,5 @@ paths:
             type: object
       summary: 移除指定用户
       tags:
-      - 用户相关
+      - 系统用户相关
 swagger: "2.0"

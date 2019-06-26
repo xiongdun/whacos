@@ -7,8 +7,8 @@ import (
 )
 
 type LoginForm struct {
-	Username string `form:"username" json:"username" binding:"required"`
-	Password string `form:"password" json:"password" binding:"required"`
+	Username string `valid:"Required; MaxSize(50)"`
+	Password string `valid:"Required; MaxSize(50)"`
 }
 
 // @Tags DEFAULT
@@ -34,17 +34,13 @@ func ToLogin(c *gin.Context) {
 // @Summary 用户登录
 // @Accept json
 // @Produce json
-// @Param username query string true "username"
-// @Param password query string true "password"
+// @Param loginForm body string true "loginForm"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /login [POST]
 func Login(c *gin.Context) {
-	var user LoginForm
-	request := c.Request
-	request.ParseForm()
-	fmt.Println(request.PostForm.Get("username"))
-	if c.Bind(&user) != nil {
+	user := LoginForm{}
+	if c.BindJSON(&user) == nil {
 		fmt.Println(user.Password)
 		fmt.Println(user.Username)
 	}

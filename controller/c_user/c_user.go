@@ -11,7 +11,7 @@ import (
 	"whacos/pkg/e"
 )
 
-// @Tags 用户相关
+// @Tags 系统用户相关
 // @Resource Name
 // @Summary 按ID 获取用户
 // @Accept json
@@ -41,7 +41,7 @@ func GetUser(c *gin.Context) {
 	})
 }
 
-// @Tags 用户相关
+// @Tags 系统用户相关
 // @Resource Name
 // @Summary 查询用户列表
 // @Accept json
@@ -64,7 +64,7 @@ func ListUser(c *gin.Context) {
 	})
 }
 
-// @Tags 用户相关
+// @Tags 系统用户相关
 // @Resource Name
 // @Summary 新增用户
 // @Accept json
@@ -112,7 +112,7 @@ func AddUser(c *gin.Context) {
 	})
 }
 
-// @Tags 用户相关
+// @Tags 系统用户相关
 // @Resource Name
 // @Summary 修改用户信息
 // @Accept json
@@ -126,7 +126,7 @@ func EditUser(c *gin.Context) {
 
 }
 
-// @Tags 用户相关
+// @Tags 系统用户相关
 // @Resource Name
 // @Summary 移除指定用户
 // @Accept json
