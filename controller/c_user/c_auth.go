@@ -16,7 +16,7 @@ type AuthForm struct {
 	Password string `valid:"Required; MaxSize(50)"`
 }
 
-// @Tags DEFAULT
+// @Tags 登录校验
 // @Resource Name
 // @Summary 校验用户并获取token 值
 // @Description 通过 username 和 password 获取 token

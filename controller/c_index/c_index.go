@@ -11,7 +11,7 @@ type LoginForm struct {
 	Password string `valid:"Required; MaxSize(50)"`
 }
 
-// @Tags DEFAULT
+// @Tags 登录校验
 // @Resource Name
 // @Summary 跳转到首页
 // @Accept json
@@ -30,7 +30,7 @@ func ToLogin(c *gin.Context) {
 
 }
 
-// @Tags DEFAULT
+// @Tags 登录校验
 // @Resource Name
 // @Summary 用户登录
 // @Accept json

@@ -16,6 +16,16 @@ definitions:
       username:
         type: string
     type: object
+  c_menu.ListMenuForm:
+    properties:
+      menuName:
+        type: string
+    type: object
+  c_role.ListRoleForm:
+    properties:
+      roleName:
+        type: string
+    type: object
   c_user.AddUserForm:
     properties:
       email:
@@ -96,6 +106,42 @@ info:
   title: Swagger For Project Whacos
   version: "1.0"
 paths:
+  /app/file/upload:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: file
+        in: query
+        name: file
+        required: true
+        type: file
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 上传文件
+      tags:
+      - APP相关
   /app/user/get/{id}:
     get:
       consumes:
@@ -165,7 +211,7 @@ paths:
             type: object
       summary: 校验用户并获取token 值
       tags:
-      - DEFAULT
+      - 登录校验
   /index:
     get:
       consumes:
@@ -190,7 +236,7 @@ paths:
             type: object
       summary: 跳转到首页
       tags:
-      - DEFAULT
+      - 登录校验
   /login:
     post:
       consumes:
@@ -223,7 +269,329 @@ paths:
             type: object
       summary: 用户登录
       tags:
-      - DEFAULT
+      - 登录校验
+  /sys/menu/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: listMenu
+        in: body
+        name: listMenu
+        required: true
+        schema:
+          $ref: '#/definitions/c_menu.ListMenuForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 新增菜单信息
+      tags:
+      - 系统菜单相关
+  /sys/menu/edit:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: listMenu
+        in: body
+        name: listMenu
+        required: true
+        schema:
+          $ref: '#/definitions/c_menu.ListMenuForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 修改菜单信息
+      tags:
+      - 系统菜单相关
+  /sys/menu/get/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 获取菜单
+      tags:
+      - 系统菜单相关
+  /sys/menu/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: listMenu
+        in: body
+        name: listMenu
+        required: true
+        schema:
+          $ref: '#/definitions/c_menu.ListMenuForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 查询菜单信息列表
+      tags:
+      - 系统菜单相关
+  /sys/menu/remove/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 删除菜单
+      tags:
+      - 系统菜单相关
+  /sys/role/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 新增角色信息
+      tags:
+      - 系统角色相关
+  /sys/role/edit:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 修改角色信息
+      tags:
+      - 系统角色相关
+  /sys/role/get/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 获取角色
+      tags:
+      - 系统角色相关
+  /sys/role/list/:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 获取角色列表
+      tags:
+      - 系统角色相关
+  /sys/role/remove/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 删除角色
+      tags:
+      - 系统角色相关
   /sys/user/add:
     post:
       consumes:

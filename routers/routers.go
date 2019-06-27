@@ -38,7 +38,7 @@ func InitRouter() *gin.Engine {
 	appApi := router.Group("/app")
 	appApi.Use(jwt.ValidJWT())
 	{
-		appApi.GET("/file/upload", c_file.UploadFile)
+		appApi.POST("/file/upload", c_file.UploadFile)
 		appApi.GET("/user/get/:id", c_user.GetAppUser)
 	}
 
@@ -57,28 +57,28 @@ func InitRouter() *gin.Engine {
 	// 角色
 	sysRole := router.Group("/sys/role")
 	{
-		sysRole.GET("/get", c_role.GetRole)
+		sysRole.GET("/get/:id", c_role.GetRole)
 
-		sysRole.POST("/list", c_role.ListRole)
+		sysRole.GET("/list", c_role.ListRole)
 
 		sysRole.POST("/add", c_role.AddRole)
 
 		sysRole.PUT("/edit", c_role.EditRole)
 
-		sysRole.DELETE("/remove", c_role.RemoveRole)
+		sysRole.DELETE("/remove/:id", c_role.RemoveRole)
 	}
 	// 菜单
 	sysMenu := router.Group("/sys/menu")
 	{
-		sysMenu.GET("/get", c_menu.GetMenu)
+		sysMenu.GET("/get/:id", c_menu.GetMenu)
 
-		sysMenu.POST("/list", c_menu.ListMenu)
+		sysMenu.GET("/list", c_menu.ListMenu)
 
 		sysMenu.POST("/add", c_menu.AddMenu)
 
 		sysMenu.PUT("/edit", c_menu.EditMenu)
 
-		sysMenu.DELETE("/remove", c_menu.RemoveMenu)
+		sysMenu.DELETE("/remove/:id", c_menu.RemoveMenu)
 	}
 
 	return router
