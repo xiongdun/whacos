@@ -5,10 +5,10 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"whacos/models/m_user"
 	"whacos/pkg/e"
 	"whacos/pkg/logging"
 	"whacos/pkg/utils"
+	"whacos/service/s_user"
 )
 
 type AuthForm struct {
@@ -40,7 +40,7 @@ func GetAuth(c *gin.Context) {
 	data := make(map[string]interface{})
 	code := e.InvalidParams
 	if ok {
-		isExist := m_user.CheckAuth(a.Username, a.Password)
+		isExist := s_user.CheckAuth(a.Username, a.Password)
 		if isExist {
 			token, err := utils.GenerateToken(a.Username, a.Password)
 			if err != nil {

@@ -1,57 +1,91 @@
 package m_user
 
 import (
+	"github.com/jinzhu/gorm"
 	"time"
 	"whacos/models"
 )
 
+const tableName = "sys_user user"
+
 type User struct {
 	models.Model
 
-	Username    string    `json:"username" gorm:"username"`
-	Name        string    `json:"name" gorm:"name"`
-	Password    string    `json:"password" gorm:"password"`
-	DeptId      int       `json:"deptId" gorm:"dept_id"`
-	Email       string    `json:"email" gorm:"email"`
-	Mobile      string    `json:"mobile" gorm:"mobile"`
-	IdCard      string    `json:"idCard" gorm:"id_card"`
-	Status      int       `json:"status" gorm:"status"`
-	Sex         int       `json:"sex" gorm:"sex"`
-	Birth       time.Time `json:"birth" gorm:"birth"`
-	PicId       int       `json:"picId" gorm:"pic_id"`
-	LiveAddress string    `json:"liveAddress" gorm:"live_address"`
-	Hobby       string    `json:"hobby" gorm:"hobby"`
-	Province    string    `json:"province" gorm:"province"`
-	City        string    `json:"city" gorm:"city"`
-	District    string    `json:"district" gorm:"district"`
-	Remarks     string    `json:"remarks" gorm:"remarks"`
+	Username    string    `json:"username" gorm:"idx_username"`
+	Name        string    `json:"name" gorm:"idx_name"`
+	Password    string    `json:"password"`
+	DeptId      int       `json:"deptId" gorm:"idx_dept_id"`
+	Email       string    `json:"email" gorm:"idx_email"`
+	Mobile      string    `json:"mobile" gorm:"idx_mobile"`
+	IdCard      string    `json:"idCard" gorm:"idx_id_card"`
+	Status      int       `json:"status"`
+	Sex         int       `json:"sex"`
+	Birth       time.Time `json:"birth"`
+	PicId       int       `json:"picId"`
+	LiveAddress string    `json:"liveAddress"`
+	Hobby       string    `json:"hobby"`
+	Province    string    `json:"province"`
+	City        string    `json:"city"`
+	District    string    `json:"district"`
+	Remarks     string    `json:"remarks"`
 }
 
-func SelectUserById(id int) (user User) {
-	models.DB.Model(&user).Table("sys_user").Where("id = ?", id).Find(&user)
-	return
+// 查询指定用户记录
+func (u *User) SelectById(id int) (*User, error) {
+	var user User
+	if err := models.DB.Model(&user).Table(tableName).Where("id = ?", id).Find(&user).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return &user, nil
 }
 
-func SelectUserList(pageNum int, pageSize int, maps interface{}) (users []User) {
-	models.DB.Table("sys_user").Where(&maps).Offset(pageNum).Limit(pageSize).Find(&users)
-	return
-}
-func CountUser(maps interface{}) (count int) {
-	models.DB.Model(&User{}).Table("sys_user").Where(&maps).Count(&count)
-	return
-}
-
-func DeleteUserById(id int) bool {
-	models.DB.Table("sys_user").Where("id = ?", id).Delete(&User{})
-	return true
+// 查询用户记录列表
+func (u *User) SelectList(param User) ([]User, error) {
+	var users []User
+	if err := models.DB.Table(tableName).Where(&param).Find(&users).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return users, nil
 }
 
-func InsertUser(user *User) bool {
-	models.DB.Table("sys_user").Create(&user)
-	return true
+// 分页查询列表记录
+func (u *User) SelectPage(param User, pageNum int, pageSize int) ([]User, error) {
+	var users []User
+	if err := models.DB.Table(tableName).Where(&param).Order("user.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&users).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return users, nil
 }
 
-func UpdateUserById(user *User) bool {
-	models.DB.Model(&User{}).Where("id = ?", user.Id).Update(&user)
-	return true
+// 统计记录
+func (u *User) Count(param User) (int, error) {
+	var count int
+	if err := models.DB.Model(&User{}).Table(tableName).Where(&param).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
+// 删除用户记录
+func (u *User) DeleteById(id int) error {
+	if err := models.DB.Table("sys_user").Where("id = ?", id).Delete(User{}).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+// 新增记录
+func (u *User) Insert(user User) error {
+	if err := models.DB.Table("sys_user").Create(&user).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+// 修改用户信息记录
+func (u *User) UpdateById(user User) error {
+	if err := models.DB.Model(&User{}).Table("sys_user").Where("id = ?", user.Id).Update(&user).Error; err != nil {
+		return err
+	}
+	return nil
 }

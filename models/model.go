@@ -12,6 +12,7 @@ import (
 var DB *gorm.DB
 var ERR error
 
+// 公共Model
 type Model struct {
 	Id          int       `json:"id" gorm:"primary_key"`
 	CreatedBy   int       `json:"createdBy"`
@@ -19,6 +20,20 @@ type Model struct {
 	UpdatedBy   int       `json:"updatedBy"`
 	UpdatedTime time.Time `json:"updatedTime"`
 	DelFlag     int       `json:"delFlag"`
+}
+
+// 分页Model
+type Page struct {
+	List      interface{} `json:"list"`
+	PageTotal int         `json:"pageTotal"`
+	Total     int         `json:"total"`
+}
+
+func PageUtils(dataList interface{}, countNum, pageSize int) (p Page) {
+	p.List = dataList
+	p.PageTotal = countNum / pageSize
+	p.Total = countNum
+	return
 }
 
 func init() {
@@ -33,11 +48,14 @@ func init() {
 		log.Println(ERR)
 	}
 
+	//  默认数据表名称
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return defaultTableName
 	}
 
 	DB.SingularTable(true)
+	DB.LogMode(true)
+	//DB.SetLogger()
 	DB.DB().SetMaxIdleConns(settings.DatabaseConfig.MaxIdleConns)
 	DB.DB().SetMaxOpenConns(settings.DatabaseConfig.MaxOpenConns)
 }

@@ -27,7 +27,7 @@ definitions:
       name:
         type: string
       sex:
-        type: string
+        type: integer
       username:
         type: string
     type: object
@@ -50,6 +50,8 @@ definitions:
         type: string
       hobby:
         type: string
+      id:
+        type: integer
       idCard:
         type: string
       liveAddress:

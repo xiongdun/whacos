@@ -436,7 +436,7 @@
                     "type": "string"
                 },
                 "sex": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "username": {
                     "type": "string"
@@ -471,6 +471,9 @@
                 },
                 "hobby": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "idCard": {
                     "type": "string"

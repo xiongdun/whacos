@@ -49,7 +49,7 @@ func InitRouter() *gin.Engine {
 
 		sysUser.POST("/add", c_user.AddUser)
 
-		sysUser.PUT("/edit/:id", c_user.EditUser)
+		sysUser.PUT("/edit", c_user.EditUser)
 
 		sysUser.DELETE("/remove/:id", c_user.RemoveUser)
 	}

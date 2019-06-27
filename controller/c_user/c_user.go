@@ -4,10 +4,10 @@ import (
 	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"time"
+	"whacos/models"
 	"whacos/models/m_user"
 	"whacos/pkg/app"
-	"whacos/pkg/e"
 	"whacos/pkg/logging"
 	"whacos/service/s_user"
 )
@@ -20,30 +20,31 @@ type ListUserForm struct {
 }
 
 type AddUserForm struct {
-	Username string `form:"username" json:"username" valid:"Required MaxSize(50)"`
-	Name     string `form:"name" json:"name" valid:"Required MaxSize(18)"`
-	IdCard   string `form:"idCard" json:"idCard" valid:"Required MaxSize(18)"`
-	Email    string `form:"email" json:"email" valid:"Required MaxSize(64)"`
-	Mobile   string `form:"mobile" json:"mobile" valid:"Required MaxSize(15)"`
-	Sex      string `form:"sex" json:"sex" valid:"Required MaxSize(1)"`
+	Username string `form:"username" json:"username" valid:"Required;MaxSize(50)"`
+	Name     string `form:"name" json:"name" valid:"Required;MaxSize(18)"`
+	IdCard   string `form:"idCard" json:"idCard" valid:"Required;MaxSize(18)"`
+	Email    string `form:"email" json:"email" valid:"Required;MaxSize(64)"`
+	Mobile   string `form:"mobile" json:"mobile" valid:"Required;MaxSize(15)"`
+	Sex      int    `form:"sex" json:"sex" valid:"Required;Range(0,1)"`
 }
 
 type EditUserForm struct {
-	Username    string `swaggo:"true,用户名" json:"username" valid:"Required MaxSize(50)"`
-	Name        string `json:"name" valid:"Required MaxSize(50)"`
-	DeptId      int    `json:"deptId" valid:"Required MaxSize(20)"`
-	Email       string `json:"email" valid:"Required MaxSize(64)"`
-	Mobile      string `json:"mobile" valid:"Required MaxSize(15)"`
-	IdCard      string `json:"idCard" valid:"Required MaxSize(18)"`
-	Status      int    `json:"status" valid:"Required MaxSize(1)"`
-	Sex         int    `json:"sex" valid:"Required MaxSize(1)"`
-	PicId       int    `json:"picId" valid:"Required MaxSize(20)"`
-	LiveAddress string `json:"liveAddress" valid:"Required MaxSize(50)"`
-	Hobby       string `json:"hobby" valid:"Required MaxSize(50)"`
-	Province    string `json:"province" valid:"Required MaxSize(50)"`
-	City        string `json:"city" valid:"Required MaxSize(50)"`
-	District    string `json:"district" valid:"Required MaxSize(50)"`
-	Remarks     string `json:"remarks" valid:"Required MaxSize(255)"`
+	Id          int    `json:"id" valid:"Required;MinSize(1)"`
+	Username    string `swaggo:"true,用户名" json:"username" valid:"Required;MaxSize(50)"`
+	Name        string `json:"name" valid:"Required;MaxSize(50)"`
+	DeptId      int    `json:"deptId" valid:"Required;MaxSize(20)"`
+	Email       string `json:"email" valid:"Required;MaxSize(64)"`
+	Mobile      string `json:"mobile" valid:"Required;MaxSize(15)"`
+	IdCard      string `json:"idCard" valid:"Required;MaxSize(18)"`
+	Status      int    `json:"status" valid:"Required;Range(0,1,2)"`
+	Sex         int    `json:"sex" valid:"Required;Range(0,1)"`
+	PicId       int    `json:"picId" valid:"Required;MaxSize(20)"`
+	LiveAddress string `json:"liveAddress" valid:"Required;MaxSize(50)"`
+	Hobby       string `json:"hobby" valid:"Required;MaxSize(50)"`
+	Province    string `json:"province" valid:"Required;MaxSize(50)"`
+	City        string `json:"city" valid:"Required;MaxSize(50)"`
+	District    string `json:"district" valid:"Required;MaxSize(50)"`
+	Remarks     string `json:"remarks" valid:"Required;MaxSize(255)"`
 }
 
 // @Tags 系统用户相关
@@ -57,7 +58,7 @@ type EditUserForm struct {
 // @Failure 500 {object} app.Response
 // @Router /sys/user/get/{id} [GET]
 func GetUser(c *gin.Context) {
-
+	appGin := app.Gin{C: c}
 	// 取值
 	id, _ := com.StrTo(c.Param("id")).Int()
 
@@ -66,15 +67,14 @@ func GetUser(c *gin.Context) {
 	valid.Required(id, "id").Message("Id不能为空！")
 	valid.Min(id, 1, "id").Message("Id必须大于0！")
 
-	// 查询
-	user := m_user.SelectUserById(id)
+	// 查询并返回
 
-	// 返回
-	c.JSON(http.StatusOK, gin.H{
-		"code": e.Success,
-		"msg":  "请求成功！",
-		"data": user,
-	})
+	if user, err := s_user.FindUserById(id); err != nil {
+		appGin.ResponseFail(err.Error())
+	} else {
+		appGin.ResponseSuccess(user)
+	}
+
 }
 
 // @Tags 系统用户相关
@@ -95,11 +95,16 @@ func ListUser(c *gin.Context) {
 		appGin.ResponseInvalidParams(nil)
 	}
 
-	maps := make(map[string]interface{})
-	//maps["status"] = 1
-	userList := m_user.SelectUserList(userForm.PageNum, userForm.PageSize, maps)
+	user := m_user.User{
+		Username: userForm.Username,
+		Name:     userForm.Name,
+	}
 
-	appGin.ResponseSuccess(userList)
+	if userPage, err := s_user.FindUserPage(user, userForm.PageNum, userForm.PageSize); err != nil {
+		appGin.ResponseFail(nil)
+	} else {
+		appGin.ResponseSuccess(userPage)
+	}
 }
 
 // @Tags 系统用户相关
@@ -122,12 +127,29 @@ func AddUser(c *gin.Context) {
 		logging.Info(err.Error())
 		return
 	}
-	user := s_user.UserDTO{}
 
-	if result, err := user.Create(user); err != nil {
+	user := m_user.User{
+		Username: addUserForm.Username,
+		Name:     addUserForm.Name,
+		IdCard:   addUserForm.IdCard,
+		Mobile:   addUserForm.Mobile,
+		Sex:      addUserForm.Sex,
+		Email:    addUserForm.Email,
+		Status:   1,
+		Birth:    time.Now(),
+		Model: models.Model{
+			DelFlag:     1,
+			CreatedBy:   1,
+			CreatedTime: time.Now(),
+			UpdatedBy:   1,
+			UpdatedTime: time.Now(),
+		},
+	}
+
+	if err := s_user.CreateUser(user); err != nil {
 		appGin.ResponseFail(nil)
 	} else {
-		appGin.ResponseSuccess(result)
+		appGin.ResponseSuccess(true)
 	}
 
 }
@@ -143,7 +165,46 @@ func AddUser(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router /sys/user/edit [PUT]
 func EditUser(c *gin.Context) {
+	appGin := app.Gin{C: c}
 
+	editUserForm := EditUserForm{}
+
+	if err := c.BindJSON(&editUserForm); err != nil {
+		appGin.ResponseInvalidParams(nil)
+		logging.Info(err.Error())
+		return
+	}
+
+	user := m_user.User{
+		Username:    editUserForm.Username,
+		Name:        editUserForm.Name,
+		IdCard:      editUserForm.IdCard,
+		Mobile:      editUserForm.Mobile,
+		Sex:         editUserForm.Sex,
+		Email:       editUserForm.Email,
+		Status:      editUserForm.Status,
+		LiveAddress: editUserForm.LiveAddress,
+		Hobby:       editUserForm.Hobby,
+		Province:    editUserForm.Province,
+		City:        editUserForm.City,
+		District:    editUserForm.District,
+		Remarks:     editUserForm.Remarks,
+		//Birth:    none,
+		Model: models.Model{
+			//DelFlag:     1,
+			//CreatedBy:   1,
+			//CreatedTime: time.Now(),
+			UpdatedBy:   1,
+			UpdatedTime: time.Now(),
+			Id:          editUserForm.Id,
+		},
+	}
+
+	if err := s_user.ModifyUser(user); err != nil {
+		appGin.ResponseFail(nil)
+	} else {
+		appGin.ResponseSuccess(true)
+	}
 }
 
 // @Tags 系统用户相关
@@ -157,17 +218,23 @@ func EditUser(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router /sys/user/remove/{id} [DELETE]
 func RemoveUser(c *gin.Context) {
-	id, _ := com.StrTo(c.Query("id")).Int()
+	id, _ := com.StrTo(c.Param("id")).Int()
 
 	valid := validation.Validation{}
 
 	valid.Required(id, "id").Message("Id不能为空！")
 	valid.Min(id, 1, "id").Message("Id必须大于0！")
 
-	isSuccess := m_user.DeleteUserById(id)
-	c.JSON(http.StatusOK, gin.H{
-		"code": e.Success,
-		"msg":  "请求成功",
-		"data": isSuccess,
-	})
+	appGin := app.Gin{C: c}
+	if valid.Errors != nil {
+		appGin.ResponseInvalidParams(nil)
+		logging.Info(valid.Errors[0].Message)
+		return
+	}
+
+	if err := s_user.RemoveUserById(id); err != nil {
+		appGin.ResponseFail(err.Error())
+	} else {
+		appGin.ResponseSuccess(true)
+	}
 }
