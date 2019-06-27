@@ -33,7 +33,15 @@ type User struct {
 // 查询指定用户记录
 func (u *User) SelectById(id int) (*User, error) {
 	var user User
-	if err := models.DB.Model(&user).Table(tableName).Where("id = ?", id).Find(&user).Error; err != nil && err != gorm.ErrRecordNotFound {
+	if err := models.DB.Model(&user).Table(tableName).Where("id = ? and del_flag = 1", id).Find(&user).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return &user, nil
+}
+
+func (u *User) SelectByUsername(username string) (*User, error) {
+	var user User
+	if err := models.DB.Model(&user).Table(tableName).Where("username = ? and del_flag = 1", username).Find(&user).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
 	return &user, nil

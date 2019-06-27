@@ -9,7 +9,7 @@ app:
   page_size: 10
 
 jwt:
-  secret: 12012021010
+  secret: QWE@TYU10P
 
 database:
   dialect: mysql

@@ -96,6 +96,42 @@ info:
   title: Swagger For Project Whacos
   version: "1.0"
 paths:
+  /app/user/get/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 获取用户
+      tags:
+      - APP相关
   /auth:
     post:
       consumes:

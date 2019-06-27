@@ -1,8 +1,10 @@
 package s_user
 
 import (
+	"fmt"
 	"whacos/models"
 	"whacos/models/m_user"
+	"whacos/pkg/utils"
 )
 
 // 按用户ID查询
@@ -64,12 +66,18 @@ func RemoveUserById(id int) error {
 	return user.DeleteById(id)
 }
 
+// 查询校验
 func CheckAuth(username, password string) bool {
-	//var user User
-	//models.DB.Model(&user).Table("sys_user user").Where(User{Username: username, Password: password}).Find(&user)
-	//if user.Id > 0 {
-	//	return true
-	//}
-
-	return true
+	user := m_user.User{}
+	if result, err := user.SelectByUsername(username); err != nil {
+		return false
+	} else {
+		// md5 加密
+		md5 := utils.EncodeMD5(password)
+		fmt.Println(md5)
+		if result != nil && result.Password == md5 {
+			return true
+		}
+	}
+	return false
 }

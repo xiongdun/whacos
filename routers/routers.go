@@ -39,6 +39,7 @@ func InitRouter() *gin.Engine {
 	appApi.Use(jwt.ValidJWT())
 	{
 		appApi.GET("/file/upload", c_file.UploadFile)
+		appApi.GET("/user/get/:id", c_user.GetAppUser)
 	}
 
 	sysUser := router.Group("/sys/user")

@@ -1,9 +1,9 @@
 package c_index
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"whacos/pkg/app"
 )
 
 type LoginForm struct {
@@ -41,9 +41,10 @@ func ToLogin(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router /login [POST]
 func Login(c *gin.Context) {
+	appGin := app.Gin{C: c}
 	user := LoginForm{}
 	if c.BindJSON(&user) == nil {
-		fmt.Println(user.Password)
-		fmt.Println(user.Username)
+		appGin.ResponseInvalidParams(nil)
+		return
 	}
 }
