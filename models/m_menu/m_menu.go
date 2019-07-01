@@ -62,8 +62,8 @@ func (m *SysMenu) Insert(sysMenu SysMenu) error {
 }
 
 // 修改菜单记录
-func (m *SysMenu) UpdateById(sysRole SysMenu) error {
-	if err := models.DB.Model(&SysMenu{}).Where("id = ?", sysRole.Id).Update(&sysRole).Error; err != nil {
+func (m *SysMenu) UpdateById(sysMenu SysMenu) error {
+	if err := models.DB.Model(&SysMenu{}).Where("id = ?", sysMenu.Id).Update(&sysMenu).Error; err != nil {
 		return err
 	}
 	return nil
