@@ -8,7 +8,7 @@ import (
 
 const tableName = "sys_user user"
 
-type User struct {
+type SysUser struct {
 	models.Model
 
 	Username    string    `json:"username" gorm:"idx_username"`
@@ -31,68 +31,69 @@ type User struct {
 }
 
 // 查询指定用户记录
-func (u *User) SelectById(id int) (*User, error) {
-	var user User
-	if err := models.DB.Model(&user).Table(tableName).Where("id = ? and del_flag = 1", id).Find(&user).Error; err != nil && err != gorm.ErrRecordNotFound {
+func (u *SysUser) SelectById(id int) (*SysUser, error) {
+	var sysUser SysUser
+	if err := models.DB.Model(&sysUser).Where("id = ? and del_flag = 1", id).Find(&sysUser).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
-	return &user, nil
+	return &sysUser, nil
 }
 
-func (u *User) SelectByUsername(username string) (*User, error) {
-	var user User
-	if err := models.DB.Model(&user).Table(tableName).Where("username = ? and del_flag = 1", username).Find(&user).Error; err != nil && err != gorm.ErrRecordNotFound {
+// 按用户名查询
+func (u *SysUser) SelectByUsername(username string) (*SysUser, error) {
+	var sysUser SysUser
+	if err := models.DB.Model(&sysUser).Where("username = ? and del_flag = 1", username).Find(&sysUser).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
-	return &user, nil
+	return &sysUser, nil
 }
 
 // 查询用户记录列表
-func (u *User) SelectList(param User) ([]User, error) {
-	var users []User
-	if err := models.DB.Table(tableName).Where(&param).Find(&users).Error; err != nil && err != gorm.ErrRecordNotFound {
+func (u *SysUser) SelectList(param SysUser) ([]SysUser, error) {
+	var users []SysUser
+	if err := models.DB.Where(&param).Find(&users).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
 	return users, nil
 }
 
 // 分页查询列表记录
-func (u *User) SelectPage(param User, pageNum int, pageSize int) ([]User, error) {
-	var users []User
-	if err := models.DB.Table(tableName).Where(&param).Order("user.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&users).Error; err != nil && err != gorm.ErrRecordNotFound {
+func (u *SysUser) SelectPage(param SysUser, pageNum int, pageSize int) ([]SysUser, error) {
+	var sysUsers []SysUser
+	if err := models.DB.Where(&param).Order("user.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&sysUsers).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
-	return users, nil
+	return sysUsers, nil
 }
 
 // 统计记录
-func (u *User) Count(param User) (int, error) {
+func (u *SysUser) Count(param SysUser) (int, error) {
 	var count int
-	if err := models.DB.Model(&User{}).Table(tableName).Where(&param).Count(&count).Error; err != nil {
+	if err := models.DB.Model(&SysUser{}).Where(&param).Count(&count).Error; err != nil {
 		return 0, err
 	}
 	return count, nil
 }
 
 // 删除用户记录
-func (u *User) DeleteById(id int) error {
-	if err := models.DB.Table("sys_user").Where("id = ?", id).Delete(User{}).Error; err != nil {
+func (u *SysUser) DeleteById(id int) error {
+	if err := models.DB.Where("id = ?", id).Update("del_flag", models.DelFlagNo).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 // 新增记录
-func (u *User) Insert(user User) error {
-	if err := models.DB.Table("sys_user").Create(&user).Error; err != nil {
+func (u *SysUser) Insert(sysUser SysUser) error {
+	if err := models.DB.Create(&sysUser).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 // 修改用户信息记录
-func (u *User) UpdateById(user User) error {
-	if err := models.DB.Model(&User{}).Table("sys_user").Where("id = ?", user.Id).Update(&user).Error; err != nil {
+func (u *SysUser) UpdateById(sysUser SysUser) error {
+	if err := models.DB.Model(&SysUser{}).Where("id = ?", sysUser.Id).Update(&sysUser).Error; err != nil {
 		return err
 	}
 	return nil

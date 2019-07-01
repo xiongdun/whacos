@@ -137,7 +137,7 @@ func ListUser(c *gin.Context) {
 		return
 	}
 
-	user := m_user.User{
+	user := m_user.SysUser{
 		Username: userForm.Username,
 		Name:     userForm.Name,
 	}
@@ -170,7 +170,7 @@ func AddUser(c *gin.Context) {
 		return
 	}
 
-	user := m_user.User{
+	user := m_user.SysUser{
 		Username: addUserForm.Username,
 		Name:     addUserForm.Name,
 		IdCard:   addUserForm.IdCard,
@@ -180,7 +180,7 @@ func AddUser(c *gin.Context) {
 		Status:   1,
 		Birth:    time.Now(),
 		Model: models.Model{
-			DelFlag:     1,
+			DelFlag:     models.DelFlagYes,
 			CreatedBy:   1,
 			CreatedTime: time.Now(),
 			UpdatedBy:   1,
@@ -217,7 +217,7 @@ func EditUser(c *gin.Context) {
 		return
 	}
 
-	user := m_user.User{
+	user := m_user.SysUser{
 		Username:    editUserForm.Username,
 		Name:        editUserForm.Name,
 		IdCard:      editUserForm.IdCard,

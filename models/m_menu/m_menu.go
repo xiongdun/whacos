@@ -1,7 +1,70 @@
 package m_menu
 
-import "whacos/models"
+import (
+	"github.com/jinzhu/gorm"
+	"whacos/models"
+)
 
-type Menu struct {
+type SysMenu struct {
 	models.Model
+
+	ParentId    int    `json:"parentId" gorm:"idx_parent_id"`
+	Name        string `json:"name"`
+	Url         string `json:"url"`
+	Permissions string `json:"permissions"`
+	MenuType    int    `json:"menuType"`
+	Icon        string `json:"icon"`
+	OrderNum    int    `json:"orderNum"`
+	Remarks     string `json:"remarks"`
+}
+
+// 查询指定菜单记录
+func (m *SysMenu) SelectById(id int) (*SysMenu, error) {
+	var sysMenu SysMenu
+	if err := models.DB.Model(&sysMenu).Where("id = ? and del_flag = 1", id).Find(&sysMenu).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return &sysMenu, nil
+}
+
+// 查询菜单记录列表
+func (m *SysMenu) SelectList(param SysMenu) ([]SysMenu, error) {
+	var menus []SysMenu
+	if err := models.DB.Where(&param).Find(&menus).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return menus, nil
+}
+
+// 统计菜单记录
+func (m *SysMenu) Count(param SysMenu) (int, error) {
+	var count int
+	if err := models.DB.Model(&SysMenu{}).Where(&param).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
+// 删除菜单记录
+func (m *SysMenu) DeleteById(id int) error {
+	if err := models.DB.Where("id = ?", id).Update("del_flag", models.DelFlagNo).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+// 新增菜单记录
+func (m *SysMenu) Insert(sysMenu SysMenu) error {
+	if err := models.DB.Create(&sysMenu).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+// 修改菜单记录
+func (m *SysMenu) UpdateById(sysRole SysMenu) error {
+	if err := models.DB.Model(&SysMenu{}).Where("id = ?", sysRole.Id).Update(&sysRole).Error; err != nil {
+		return err
+	}
+	return nil
 }

@@ -9,8 +9,13 @@ import (
 	"whacos/pkg/settings"
 )
 
-var DB *gorm.DB
-var ERR error
+var (
+	DB  *gorm.DB
+	ERR error
+
+	DelFlagYes = 1
+	DelFlagNo  = 0
+)
 
 // 公共Model
 type Model struct {
@@ -19,7 +24,7 @@ type Model struct {
 	CreatedTime time.Time `json:"createdTime"`
 	UpdatedBy   int       `json:"updatedBy"`
 	UpdatedTime time.Time `json:"updatedTime"`
-	DelFlag     int       `json:"delFlag"`
+	DelFlag     int       `json:"delFlag" default:"1"`
 }
 
 // 分页Model
@@ -50,7 +55,7 @@ func init() {
 
 	//  默认数据表名称
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		return defaultTableName
+		return "t_" + defaultTableName
 	}
 
 	DB.SingularTable(true)
