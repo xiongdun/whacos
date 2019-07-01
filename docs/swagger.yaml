@@ -270,6 +270,425 @@ paths:
       summary: 用户登录
       tags:
       - 登录校验
+  /sys/dict/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 新增数据字典信息
+      tags:
+      - 数据字典相关
+  /sys/dict/edit:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 修改数据字典信息
+      tags:
+      - 数据字典相关
+  /sys/dict/remove/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 删除角色
+      tags:
+      - 数据字典相关
+  /sys/file/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 新增文件信息
+      tags:
+      - 文件相关
+  /sys/file/edit:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 修改文件信息
+      tags:
+      - 文件相关
+  /sys/file/get/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 获取文件详情
+      tags:
+      - 文件相关
+  /sys/file/list/:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 获取文件列表
+      tags:
+      - 文件相关
+  /sys/file/remove/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 删除文件
+      tags:
+      - 文件相关
+  /sys/log/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 新增系统日志信息
+      tags:
+      - 系统日志相关
+  /sys/log/edit:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 修改系统日志信息
+      tags:
+      - 系统日志相关
+  /sys/log/get/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 获取系统日志详情
+      tags:
+      - 系统日志相关
+  /sys/log/list/:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 获取系统日志列表
+      tags:
+      - 系统日志相关
+  /sys/log/remove/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 删除角色
+      tags:
+      - 系统日志相关
   /sys/menu/add:
     post:
       consumes:
@@ -592,6 +1011,167 @@ paths:
       summary: 按ID 删除角色
       tags:
       - 系统角色相关
+  /sys/task/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 新增定时任务信息
+      tags:
+      - 定时任务相关
+  /sys/task/edit:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 修改定时任务信息
+      tags:
+      - 定时任务相关
+  /sys/task/get/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 获取定时任务详情
+      tags:
+      - 定时任务相关
+  /sys/task/list/:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 获取定时任务列表
+      tags:
+      - 定时任务相关
+  /sys/task/remove/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 删除定时任务
+      tags:
+      - 定时任务相关
   /sys/user/add:
     post:
       consumes:

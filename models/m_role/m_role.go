@@ -8,9 +8,9 @@ import (
 type SysRole struct {
 	models.Model
 
-	Name        string `json:"name"`
-	EnglishName string `json:"englishName"`
-	Remarks     string `json:"remarks"`
+	Name    string `json:"name"`
+	Code    string `json:"code"`
+	Remarks string `json:"remarks"`
 }
 
 // 查询指定用户记录
