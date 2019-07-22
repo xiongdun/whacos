@@ -15,7 +15,7 @@ import (
 // @Success 200 {object} app.Response
 // @Failure 400 {object} app.Response
 // @Failure 500 {object} app.Response
-// @Router /sys/role/get/{id} [GET]
+// @Router /sys/dict/get/{id} [GET]
 func GetDict(c *gin.Context) {
 
 }
@@ -29,7 +29,7 @@ func GetDict(c *gin.Context) {
 // @Success 200 {object} app.Response
 // @Failure 400 {object} app.Response
 // @Failure 500 {object} app.Response
-// @Router /sys/role/list/ [GET]
+// @Router /sys/dict/list/ [GET]
 func ListDict(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": e.Success,

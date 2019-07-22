@@ -336,6 +336,70 @@ paths:
       summary: 修改数据字典信息
       tags:
       - 数据字典相关
+  /sys/dict/get/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 按ID 获取数据字典详情
+      tags:
+      - 数据字典相关
+  /sys/dict/list/:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: listRole
+        in: body
+        name: listRole
+        required: true
+        schema:
+          $ref: '#/definitions/c_role.ListRoleForm'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+            type: object
+      summary: 获取数据字典列表
+      tags:
+      - 数据字典相关
   /sys/dict/remove/{id}:
     delete:
       consumes:
