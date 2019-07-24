@@ -25,6 +25,15 @@ func (l *Log) SelectById(id int) (*Log, error) {
 	return &log, nil
 }
 
+// 分页查询列表记录
+func (l *Log) SelectPage(param Log, pageNum int, pageSize int) ([]Log, error) {
+	var logs []Log
+	if err := models.DB.Where(&param).Order("log.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&logs).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return logs, nil
+}
+
 // 查询日志列表
 func (l *Log) SelectList(param Log) ([]Log, error) {
 	var logs []Log

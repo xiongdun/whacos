@@ -27,6 +27,15 @@ func (m *SysMenu) SelectById(id int) (*SysMenu, error) {
 	return &sysMenu, nil
 }
 
+// 分页查询列表记录
+func (m *SysMenu) SelectPage(param SysMenu, pageNum int, pageSize int) ([]SysMenu, error) {
+	var sysMenus []SysMenu
+	if err := models.DB.Where(&param).Order("menu.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&sysMenus).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return sysMenus, nil
+}
+
 // 查询菜单记录列表
 func (m *SysMenu) SelectList(param SysMenu) ([]SysMenu, error) {
 	var menus []SysMenu

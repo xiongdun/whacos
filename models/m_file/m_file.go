@@ -23,6 +23,15 @@ func (f *File) SelectById(id int) (*File, error) {
 	return &file, nil
 }
 
+// 分页查询列表记录
+func (f *File) SelectPage(param File, pageNum int, pageSize int) ([]File, error) {
+	var files []File
+	if err := models.DB.Where(&param).Order("file.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&files).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return files, nil
+}
+
 // 查询文件记录列表
 func (f *File) SelectList(param File) ([]File, error) {
 	var files []File

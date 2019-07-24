@@ -26,6 +26,15 @@ func (t *Task) SelectById(id int) (*Task, error) {
 	return &task, nil
 }
 
+// 分页查询列表记录
+func (t *Task) SelectPage(param Task, pageNum int, pageSize int) ([]Task, error) {
+	var tasks []Task
+	if err := models.DB.Where(&param).Order("role.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&tasks).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return tasks, nil
+}
+
 // 查询日志列表
 func (t *Task) SelectList(param Task) ([]Task, error) {
 	var tasks []Task

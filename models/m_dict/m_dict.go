@@ -24,6 +24,15 @@ func (d *Dict) SelectById(id int) (*Dict, error) {
 	return &dict, nil
 }
 
+// 分页查询列表记录
+func (d *Dict) SelectPage(param Dict, pageNum int, pageSize int) ([]Dict, error) {
+	var dicts []Dict
+	if err := models.DB.Where(&param).Order("dict.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&dicts).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return dicts, nil
+}
+
 // 查询数据字典记录列表
 func (d *Dict) SelectList(param Dict) ([]Dict, error) {
 	var dicts []Dict

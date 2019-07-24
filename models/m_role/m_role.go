@@ -22,6 +22,15 @@ func (r *SysRole) SelectById(id int) (*SysRole, error) {
 	return &sysRole, nil
 }
 
+// 分页查询列表记录
+func (r *SysRole) SelectPage(param SysRole, pageNum int, pageSize int) ([]SysRole, error) {
+	var sysRoles []SysRole
+	if err := models.DB.Where(&param).Order("role.created_time desc").Offset(pageNum - 1).Limit(pageSize).Find(&sysRoles).Error; err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return sysRoles, nil
+}
+
 // 查询角色记录列表
 func (r *SysRole) SelectList(param SysRole) ([]SysRole, error) {
 	var roles []SysRole
