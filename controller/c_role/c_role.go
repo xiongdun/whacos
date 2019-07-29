@@ -10,6 +10,14 @@ type ListRoleForm struct {
 	RoleName string `json:"roleName"`
 }
 
+type AddRoleForm struct {
+	RoleName string `json:"roleName"`
+}
+
+type EditRoleForm struct {
+	RoleName string `json:"roleName"`
+}
+
 // @Tags 系统角色相关
 // @Resource Name
 // @Summary 按ID 获取角色

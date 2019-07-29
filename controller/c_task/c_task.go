@@ -6,6 +6,18 @@ import (
 	"whacos/pkg/e"
 )
 
+type ListTaskForm struct {
+	JobName string `json:"jobName"`
+}
+
+type AddTaskForm struct {
+	JobName string `json:"jobName"`
+}
+
+type EditTaskForm struct {
+	JobName string `json:"jobName"`
+}
+
 // @Tags 定时任务相关
 // @Resource Name
 // @Summary 按ID 获取定时任务详情

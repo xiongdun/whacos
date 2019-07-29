@@ -17,7 +17,7 @@ type Task struct {
 	Remarks        string `json:"remarks"`
 }
 
-// 查询日志记录
+// 查询任务记录
 func (t *Task) SelectById(id int) (*Task, error) {
 	var task Task
 	if err := models.DB.Model(&task).Where("id = ? and del_flag = 1", id).Find(&task).Error; err != nil && err != gorm.ErrRecordNotFound {
@@ -35,7 +35,7 @@ func (t *Task) SelectPage(param Task, pageNum int, pageSize int) ([]Task, error)
 	return tasks, nil
 }
 
-// 查询日志列表
+// 查询任务列表
 func (t *Task) SelectList(param Task) ([]Task, error) {
 	var tasks []Task
 	if err := models.DB.Where(&param).Find(&tasks).Error; err != nil && err != gorm.ErrRecordNotFound {
@@ -44,7 +44,7 @@ func (t *Task) SelectList(param Task) ([]Task, error) {
 	return tasks, nil
 }
 
-// 统计日志
+// 统计任务
 func (t *Task) Count(param Task) (int, error) {
 	var count int
 	if err := models.DB.Model(&Task{}).Where(&param).Count(&count).Error; err != nil {
@@ -53,7 +53,7 @@ func (t *Task) Count(param Task) (int, error) {
 	return count, nil
 }
 
-// 删除日志
+// 删除任务
 func (t *Task) DeleteById(id int) error {
 	if err := models.DB.Where("id = ?", id).Update("del_flag", models.DelFlagNo).Error; err != nil {
 		return err
@@ -61,7 +61,7 @@ func (t *Task) DeleteById(id int) error {
 	return nil
 }
 
-// 新增日志
+// 新增任务
 func (t *Task) Insert(task Task) error {
 	if err := models.DB.Create(&task).Error; err != nil {
 		return err
@@ -69,7 +69,7 @@ func (t *Task) Insert(task Task) error {
 	return nil
 }
 
-// 修改日志
+// 修改任务
 func (t *Task) UpdateById(task Task) error {
 	if err := models.DB.Model(&Task{}).Where("id = ?", task.Id).Update(&task).Error; err != nil {
 		return err
