@@ -1,6 +1,7 @@
 package c_user
 
 import (
+	"fmt"
 	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
@@ -9,6 +10,7 @@ import (
 	"whacos/models/m_user"
 	"whacos/pkg/app"
 	"whacos/pkg/logging"
+	"whacos/pkg/utils"
 	"whacos/service/s_user"
 )
 
@@ -70,6 +72,15 @@ func GetUser(c *gin.Context) {
 	if valid.HasErrors() {
 		appGin.ResponseInvalidParams(nil)
 		return
+	}
+
+	reply, err := utils.SetString("xing", "sdsdsd")
+	if err == nil {
+		fmt.Println(reply)
+	}
+	value, err1 := utils.GetString("xing")
+	if err1 == nil {
+		fmt.Println(value)
 	}
 
 	// 查询并返回

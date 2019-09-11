@@ -26,8 +26,11 @@ var (
 	JwtSecret string
 
 	DatabaseConfig databaseConfig
+
+	RedisConfig redisConfig
 )
 
+// 数据库配置
 type databaseConfig struct {
 	Dialect      string
 	Host         string
@@ -36,6 +39,16 @@ type databaseConfig struct {
 	Password     string
 	MaxIdleConns int
 	MaxOpenConns int
+}
+
+//
+type redisConfig struct {
+	Network     string
+	Host        string
+	Password    string
+	MaxIdle     int
+	MaxActive   int
+	IdleTimeout time.Duration
 }
 
 type ConfigEngine struct {
@@ -58,7 +71,7 @@ func init() {
 	ReadTimeout = time.Duration(Config.GetInt("server.read_timeout")) * time.Second
 	WriteTimeout = time.Duration(Config.GetInt("server.write_timeout")) * time.Second
 
-	// databaseconfig
+	// mysql 数据库连接
 	DatabaseConfig.Dialect = Config.GetString("database.dialect")
 	DatabaseConfig.Host = Config.GetString("database.host")
 	DatabaseConfig.Name = Config.GetString("database.name")
@@ -66,6 +79,14 @@ func init() {
 	DatabaseConfig.Password = Config.GetString("database.password")
 	DatabaseConfig.MaxIdleConns = Config.GetInt("database.max_idle_conns")
 	DatabaseConfig.MaxOpenConns = Config.GetInt("database.max_open_conns")
+
+	// redis 连接配置
+	RedisConfig.Network = Config.GetString("redis.network")
+	RedisConfig.Host = Config.GetString("redis.host")
+	RedisConfig.Password = Config.GetString("redis.password")
+	RedisConfig.MaxIdle = Config.GetInt("redis.max_idle")
+	RedisConfig.MaxActive = Config.GetInt("redis.max_active")
+	RedisConfig.IdleTimeout = time.Duration(Config.GetInt("redis.idle_timeout")) * time.Second
 }
 
 // 将ymal文件中的内容进行加载
