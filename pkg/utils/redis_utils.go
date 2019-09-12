@@ -35,13 +35,6 @@ func init() {
 		logging.Info("Connect to redis error , this error reason is ", err, err.Error())
 	}
 
-	s, e := redis.String(conn.Do(commandNameGet, "xing"))
-	fmt.Println("ss", s, e)
-
-	//defer CloseRedis()
-
-	s1, e2 := redis.String(conn.Do(commandNameGet, "xing"))
-	fmt.Println("ss水水水水", s1, e2)
 }
 
 // 连接池
