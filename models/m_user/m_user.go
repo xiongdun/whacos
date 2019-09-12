@@ -11,23 +11,23 @@ const tableName = "sys_user user"
 type SysUser struct {
 	models.Model
 
-	Username    string    `json:"username" gorm:"idx_username"`
-	Name        string    `json:"name" gorm:"idx_name"`
-	Password    string    `json:"password"`
-	DeptId      int       `json:"deptId" gorm:"idx_dept_id"`
-	Email       string    `json:"email" gorm:"idx_email"`
-	Mobile      string    `json:"mobile" gorm:"idx_mobile"`
-	IdCard      string    `json:"idCard" gorm:"idx_id_card"`
-	Status      int       `json:"status"`
-	Sex         int       `json:"sex"`
-	Birth       time.Time `json:"birth"`
-	PicId       int       `json:"picId"`
-	LiveAddress string    `json:"liveAddress"`
-	Hobby       string    `json:"hobby"`
-	Province    string    `json:"province"`
-	City        string    `json:"city"`
-	District    string    `json:"district"`
-	Remarks     string    `json:"remarks"`
+	Username    string     `json:"username" gorm:"uk_username"`   // 用户名（唯一）
+	RealName    string     `json:"realName"`                      // 真实姓名
+	Password    string     `json:"password"`                      // 密码
+	DeptId      int        `json:"deptId" gorm:"idx_dept_id"`     // 部门ID
+	Email       string     `json:"email" gorm:"uk_email"`         // 邮箱
+	MobilePhone string     `json:"mobile" gorm:"uk_mobile_phone"` // 电话号码
+	IdCard      string     `json:"idCard" gorm:"uk_id_card"`      // 身份号码
+	Status      int        `json:"status"`                        // 用户状态
+	Gender      int        `json:"gender"`                        // 性别
+	Birth       *time.Time `json:"birth"`                         // 出生日期
+	AvatarId    int        `json:"avatarId"`                      // 用户头像 （文件Id）
+	WorkAddress string     `json:"workAddress"`                   // 工作详细地址
+	Hobby       string     `json:"hobby"`                         // 爱好
+	Province    string     `json:"province"`                      // 省
+	City        string     `json:"city"`                          // 市
+	District    string     `json:"district"`                      // 区
+	Remark      string     `json:"remarks"`                       // 备注
 }
 
 // 查询指定用户记录

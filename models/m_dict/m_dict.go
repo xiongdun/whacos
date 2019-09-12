@@ -8,11 +8,11 @@ import (
 type Dict struct {
 	models.Model
 
-	Name     string `json:"name"`
-	Value    string `json:"value"`
-	DictType string `json:"dictType"`
-	SortNum  int    `json:"sortNum"`
-	ParentId int    `json:"parentId" gorm:"idx_parent_id"`
+	ParentId int    `json:"parentId" gorm:"idx_parent_id"` // 父字典ID
+	Name     string `json:"name"`                          // 字典名称
+	Value    string `json:"value"`                         // 字典值
+	DictType string `json:"dictType"`                      // 字典类型
+	SortNum  int    `json:"sortNum"`                       // 排序号
 }
 
 // 查询指定数据字典记录

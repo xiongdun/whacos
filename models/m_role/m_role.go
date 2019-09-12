@@ -8,9 +8,10 @@ import (
 type SysRole struct {
 	models.Model
 
-	Name    string `json:"name"`
-	Code    string `json:"code"`
-	Remarks string `json:"remarks"`
+	ParentId int    `json:"parentId" gorm:"idx_parent_id"` // 父角色ID
+	Name     string `json:"name"`                          // 角色名
+	Code     string `json:"code"`                          // 角色自定义ID
+	Remark   string `json:"remark"`                        //  备注
 }
 
 // 查询指定用户记录

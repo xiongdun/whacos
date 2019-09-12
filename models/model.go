@@ -19,12 +19,12 @@ var (
 
 // 公共Model
 type Model struct {
-	Id          int       `json:"id" gorm:"primary_key"`
-	CreatedBy   int       `json:"createdBy"`
-	CreatedTime time.Time `json:"createdTime"`
-	UpdatedBy   int       `json:"updatedBy"`
-	UpdatedTime time.Time `json:"updatedTime"`
-	DelFlag     int       `json:"delFlag" default:"1"`
+	Id          int        `json:"id" gorm:"primary_key"` // 主键ID
+	CreatedBy   int        `json:"createdBy"`             // 创建人
+	CreatedTime *time.Time `json:"createdTime"`           // 创建时间
+	UpdatedBy   int        `json:"updatedBy"`             // 修改人
+	UpdatedTime *time.Time `json:"updatedTime"`           // 修改时间
+	DelFlag     int        `json:"delFlag" default:"1"`   // 删除标记，默认为1
 }
 
 // 分页Model

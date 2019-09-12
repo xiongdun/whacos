@@ -7,14 +7,14 @@ import (
 
 type Task struct {
 	models.Model
-	JobName        string `json:"jobName"`
-	CronExpression string `json:"cronExpression"`
-	ModelName      string `json:"modelName"`
-	MethodName     string `json:"methodName"`
-	ConcurrentFlag string `json:"concurrentFlag"`
-	JobStatus      string `json:"jobStatus"`
-	JobGroup       string `json:"jobGroup"`
-	Remarks        string `json:"remarks"`
+	TaskName       string `json:"taskName" gorm:"idx_task_name"` // 任务名称
+	CronExpression string `json:"cronExpression"`                // cron 表达式
+	ModelName      string `json:"modelName"`                     // 模块名称
+	MethodName     string `json:"methodName"`                    // 方法名称
+	ConcurrentFlag string `json:"concurrentFlag"`                // 并发标记
+	Status         string `json:"status"`                        // 任务状态
+	TaskGroup      string `json:"taskGroup"`                     // 任务组
+	Remark         string `json:"remarks"`                       // 备注
 }
 
 // 查询任务记录

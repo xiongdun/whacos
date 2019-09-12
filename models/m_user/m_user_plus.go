@@ -4,8 +4,7 @@ import "whacos/models"
 
 type SysUserPlus struct {
 	models.Model
-	userId   int    `json:"userId" gorm:"idex_user_id"`
-	bankCard string `json:"bankCard"`
-	bankName string `json:"bankName"`
-	password string `json:"password"`
+	UserId   int    `json:"userId" gorm:"idx_user_id"`
+	BankCard string `json:"bankCard"`
+	BankName string `json:"bankName"`
 }

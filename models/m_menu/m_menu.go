@@ -8,14 +8,14 @@ import (
 type SysMenu struct {
 	models.Model
 
-	ParentId    int    `json:"parentId" gorm:"idx_parent_id"`
-	Name        string `json:"name"`
-	Url         string `json:"url"`
-	Permissions string `json:"permissions"`
-	MenuType    int    `json:"menuType"`
-	Icon        string `json:"icon"`
-	OrderNum    int    `json:"orderNum"`
-	Remarks     string `json:"remarks"`
+	ParentId    int    `json:"parentId" gorm:"idx_parent_id"` // 父菜单ID
+	Name        string `json:"name"`                          // 菜单名称
+	Url         string `json:"url"`                           // 菜单url
+	Permissions string `json:"permissions"`                   // 菜单权限
+	MenuType    int    `json:"menuType"`                      // 菜单类型
+	Icon        string `json:"icon"`                          // 菜单图标
+	OrderNum    int    `json:"orderNum"`                      // 排序号
+	Remark      string `json:"remark"`                        // 备注
 }
 
 // 查询指定菜单记录

@@ -2,18 +2,21 @@ package m_log
 
 import (
 	"github.com/jinzhu/gorm"
+	"time"
 	"whacos/models"
 )
 
 type Log struct {
-	models.Model
-	UserId    int    `json:"userId" gorm:"idx_user_id"`
-	Username  string `json:"username"`
-	Operation string `json:"operation"`
-	Time      int    `json:"time"`
-	Method    string `json:"method"`
-	Params    string `json:"params"`
-	Ip        string `json:"ip"`
+	Id          int        `json:"id" gorm:"primary_key"`     // 主键ID
+	UserId      int        `json:"userId" gorm:"idx_user_id"` // 用户Id
+	Username    string     `json:"username"`                  // 用户名
+	Operation   string     `json:"operation"`                 // 操作类型
+	Times       int        `json:"times"`                     // 耗费时长
+	Method      string     `json:"method"`                    // 请求方法
+	Params      string     `json:"params"`                    // 请求参数
+	IpAddress   string     `json:"ipAddress"`                 // ip地址
+	CreatedBy   int        `json:"createdBy"`                 // 创建人
+	CreatedTime *time.Time `json:"createdTime"`               // 创建时间
 }
 
 // 查询日志记录

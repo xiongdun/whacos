@@ -7,11 +7,11 @@ import (
 
 type File struct {
 	models.Model
-	Name    string `json:"name"`
-	KeyId   string `json:"keyId"`
-	Suffix  string `json:"suffix"`
-	Size    int    `json:"size"`
-	Address string `json:"address"`
+	Name    string `json:"name"`    // 文件名
+	KeyId   string `json:"keyId"`   // keyId
+	Suffix  string `json:"suffix"`  // 文件后缀
+	Size    int    `json:"size"`    // 文件大小
+	Address string `json:"address"` // 文件地址
 }
 
 // 查询指定文件记录
