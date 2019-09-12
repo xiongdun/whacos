@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"time"
 	"whacos/pkg/logging"
@@ -73,8 +72,6 @@ func CloseRedis() {
 	if err != nil {
 		logging.Info("Close to redis error , this error reason is ", err, err.Error())
 	}
-	s1, e2 := redis.String(conn.Do(commandNameGet, "xing"))
-	fmt.Println("ss水水水水", s1, e2)
 }
 
 // 设置过期时间
