@@ -16,7 +16,7 @@ database:
   host: 148.70.20.37:3306
   name: whacos
   username: root
-  password: Password123.
+  password: 123456
   max_idle_conns: 10
   max_open_conns: 100
 
@@ -28,4 +28,6 @@ redis:
   max_active: 20
   idle_timeout: 240
 
+kafka:
+  host: 148.70.20.37:6379
 

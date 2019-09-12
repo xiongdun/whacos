@@ -1,16 +1,13 @@
 package c_user
 
 import (
-	"fmt"
 	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"time"
 	"whacos/models"
 	"whacos/models/m_user"
 	"whacos/pkg/app"
 	"whacos/pkg/logging"
-	"whacos/pkg/utils"
 	"whacos/service/s_user"
 )
 
@@ -74,17 +71,7 @@ func GetUser(c *gin.Context) {
 		return
 	}
 
-	reply, err := utils.SetString("xing", "sdsdsd")
-	if err == nil {
-		fmt.Println(reply)
-	}
-	value, err1 := utils.GetString("xing")
-	if err1 == nil {
-		fmt.Println(value)
-	}
-
 	// 查询并返回
-
 	if user, err := s_user.FindUserById(id); err != nil {
 		appGin.ResponseFail(err.Error())
 	} else {
@@ -150,7 +137,7 @@ func ListUser(c *gin.Context) {
 
 	user := m_user.SysUser{
 		Username: userForm.Username,
-		Name:     userForm.Name,
+		RealName: userForm.Name,
 	}
 
 	if userPage, err := s_user.FindUserPage(user, userForm.PageNum, userForm.PageSize); err != nil {
@@ -182,20 +169,20 @@ func AddUser(c *gin.Context) {
 	}
 
 	user := m_user.SysUser{
-		Username: addUserForm.Username,
-		Name:     addUserForm.Name,
-		IdCard:   addUserForm.IdCard,
-		Mobile:   addUserForm.Mobile,
-		Sex:      addUserForm.Sex,
-		Email:    addUserForm.Email,
-		Status:   1,
-		Birth:    time.Now(),
+		Username:    addUserForm.Username,
+		RealName:    addUserForm.Name,
+		IdCard:      addUserForm.IdCard,
+		MobilePhone: addUserForm.Mobile,
+		Gender:      addUserForm.Sex,
+		Email:       addUserForm.Email,
+		Status:      1,
+		Birth:       nil,
 		Model: models.Model{
 			DelFlag:     models.DelFlagYes,
 			CreatedBy:   1,
-			CreatedTime: time.Now(),
+			CreatedTime: nil,
 			UpdatedBy:   1,
-			UpdatedTime: time.Now(),
+			UpdatedTime: nil,
 		},
 	}
 
@@ -230,25 +217,25 @@ func EditUser(c *gin.Context) {
 
 	user := m_user.SysUser{
 		Username:    editUserForm.Username,
-		Name:        editUserForm.Name,
+		RealName:    editUserForm.Name,
 		IdCard:      editUserForm.IdCard,
-		Mobile:      editUserForm.Mobile,
-		Sex:         editUserForm.Sex,
+		MobilePhone: editUserForm.Mobile,
+		Gender:      editUserForm.Sex,
 		Email:       editUserForm.Email,
 		Status:      editUserForm.Status,
-		LiveAddress: editUserForm.LiveAddress,
+		WorkAddress: editUserForm.LiveAddress,
 		Hobby:       editUserForm.Hobby,
 		Province:    editUserForm.Province,
 		City:        editUserForm.City,
 		District:    editUserForm.District,
-		Remarks:     editUserForm.Remarks,
+		Remark:      editUserForm.Remarks,
 		//Birth:    none,
 		Model: models.Model{
 			//DelFlag:     1,
 			//CreatedBy:   1,
 			//CreatedTime: time.Now(),
 			UpdatedBy:   1,
-			UpdatedTime: time.Now(),
+			UpdatedTime: nil,
 			Id:          editUserForm.Id,
 		},
 	}
