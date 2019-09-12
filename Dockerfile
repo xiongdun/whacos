@@ -4,7 +4,7 @@ FROM golang:1.12.6
 RUN mkdir /app
 
 # Copy the application files (needed for production)
-ADD whacos /app/whacos
+ADD whacos/whacos /app/whacos
 
 # Set the working directory to the app directory
 WORKDIR /app
