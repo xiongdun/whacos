@@ -11,7 +11,7 @@ MAINTAINER xiongdun "1274328268@qq.com"
 ## Set the working directory to the app directory
 #WORKDIR /app
 WORKDIR /app/whacos
-COPY . /app/whacos
+COPY /usr/local/go/whacos/whacos /app/whacos
 RUN cd /app/whacos && go build .
 
 # Expose the application on port 8080.
