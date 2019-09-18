@@ -1,6 +1,6 @@
 # 指定哪种镜像作为新镜像的基础镜像
-#@FROM golang:1.12.6
-FROM alpine:latest
+FROM golang:1.12.6
+#FROM alpine:latest
 # 指明该镜像的作者和其电子邮件
 MAINTAINER xiongdun "1274328268@qq.com"
 # Create the directory where the application will reside
@@ -11,10 +11,11 @@ MAINTAINER xiongdun "1274328268@qq.com"
 #
 ## Set the working directory to the app directory
 #WORKDIR /app
-WORKDIR /app/whacos
-COPY . /app/whacos
+WORKDIR /usr/local/go/whacos
+COPY . .
 #RUN cd /app/whacos && go build .
-
+ # 编译一个静态的go应用（在二进制构建中包含C语言依赖库）
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 # Expose the application on port 8080.
 # This should be the same as in the app.conf file
 EXPOSE 8090
