@@ -19,7 +19,7 @@ RUN go build .
 EXPOSE 8090
 
 # Set the entry point of the container to the application executable
-ENTRYPOINT /app/whacos
+ENTRYPOINT ["/app/whcos"]
 #
 #FROM debian:stretch
 #
