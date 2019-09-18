@@ -19,7 +19,7 @@ COPY . /app/whacos
 EXPOSE 8090
 
 # Set the entry point of the container to the application executable
-ENTRYPOINT ["./whacos.exe"]
+ENTRYPOINT ["./whacos"]
 #
 #FROM debian:stretch
 #
