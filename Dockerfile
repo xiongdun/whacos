@@ -1,5 +1,6 @@
 # 指定哪种镜像作为新镜像的基础镜像
-FROM golang:1.12.6
+#@FROM golang:1.12.6
+FROM alpine:latest
 # 指明该镜像的作者和其电子邮件
 MAINTAINER xiongdun "1274328268@qq.com"
 # Create the directory where the application will reside
@@ -19,7 +20,7 @@ COPY . /app/whacos
 EXPOSE 8090
 
 # Set the entry point of the container to the application executable
-ENTRYPOINT ["cd", "/app/whacos", "./whacos"]
+ENTRYPOINT ["./whacos"]
 #
 #FROM debian:stretch
 #
