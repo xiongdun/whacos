@@ -24,7 +24,7 @@ ENTRYPOINT ["cd", "/app/whacos", "./whacos"]
 #FROM debian:stretch
 #
 #ARG DEBIAN_FRONTEND=noninteractive
-#ARG JAVA_VERSION=8
+#ARG JAVA_VERSION=8r
 #ARG JAVA_UPDATE=172
 #ARG JAVA_BUILD=11
 #ARG JAVA_PACKAGE=jdk
