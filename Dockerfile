@@ -12,7 +12,7 @@ MAINTAINER xiongdun "1274328268@qq.com"
 #WORKDIR /app
 WORKDIR /app/whacos
 COPY . /app/whacos
-RUN cd /app/whacos && go build .
+#RUN cd /app/whacos && go build .
 
 # Expose the application on port 8080.
 # This should be the same as in the app.conf file
