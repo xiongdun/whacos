@@ -12,19 +12,20 @@ MAINTAINER xiongdun "1274328268@qq.com"
 ## Set the working directory to the app directory
 #WORKDIR /app
 #WORKDIR /usr/local/go/whacos
-WORKDIR $GOPATH/src/whacos
-ADD . $GOPATH/src/whacos
+#WORKDIR $GOPATH/src/whacos
+#ADD . $GOPATH/src/whacos
 #COPY . .
 #RUN cd /app/whacos && go build .
  # 编译一个静态的go应用（在二进制构建中包含C语言依赖库）
 #RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
-RUN go build main.go
+#RUN go build main.go
 # Expose the application on port 8080.
 # This should be the same as in the app.conf file
+RUN go get github.com/xiongdun/whacos
 EXPOSE 8090
 
 # Set the entry point of the container to the application executable
-ENTRYPOINT ["./main"]
+#ENTRYPOINT ["./main"]
 #
 #FROM debian:stretch
 #
