@@ -316,6 +316,216 @@
 			"path": "gopkg.in/yaml.v2",
 			"revision": "51d6538a90f86fe93ac480b35f37b2be17fef232",
 			"revisionTime": "2018-11-15T11:05:04Z"
+		},
+		{
+			"checksumSHA1": "A5dVSXSWwttIltVWH4uwbgLAN/0=",
+			"path": "whacos",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "EF46ZdAtIoC8MNIwkjUZl5MJc1Y=",
+			"path": "whacos/controller/c_dict",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "l2eqEiedi1zSvoXSZPPh2qfVbuw=",
+			"path": "whacos/controller/c_file",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "lSeYjIdDPFDmd9obTAFrmc+fNYk=",
+			"path": "whacos/controller/c_index",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "QeSUZcC0YtjrnJASfHrGDDBBm7U=",
+			"path": "whacos/controller/c_log",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "QadbQSrEjNXTAzbsdf0r3cfz8ug=",
+			"path": "whacos/controller/c_menu",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "16f9Tsl422HordOSZjTpKqwzir0=",
+			"path": "whacos/controller/c_role",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "bzhIAdhcEoDYeNC2f2dH/4yaRNs=",
+			"path": "whacos/controller/c_task",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "bKfU5rML9kDTD80gJ1hKl6Q5pGI=",
+			"path": "whacos/controller/c_user",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "tSKszp9dZOhkmoGS7Xe8NAcYD84=",
+			"path": "whacos/docs",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "v1eZIR5XIyo43g7kggNkSoAh1HQ=",
+			"path": "whacos/middleware/jwt",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "+nFT/G1GHRADeFdBLRiwOCVKpv4=",
+			"path": "whacos/models",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "DcRVPS31bV6BsxiIvv7Ufmwle6A=",
+			"path": "whacos/models/m_dept",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "IwVbk4M0LUOXjkIaAKE7el9q9aA=",
+			"path": "whacos/models/m_dict",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "uFSYq40n1B28fySEklmkuMK6LFk=",
+			"path": "whacos/models/m_file",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "BRa7FPJ3wpA3Vz8icRbW314ghV4=",
+			"path": "whacos/models/m_log",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "PWBe0I+tkn3bYU95QOfq6dvGvi4=",
+			"path": "whacos/models/m_menu",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "n13/3CobdTkXuRn4KgCsSW5VtfI=",
+			"path": "whacos/models/m_role",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "9fenjhPQ3P6cib1HTJ+vInIVy5A=",
+			"path": "whacos/models/m_task",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "BdUQwrOA7UVGNlqBtEIjriKmmAE=",
+			"path": "whacos/models/m_user",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "CdQWsSTiqzieu9TtrXysw7aFdKg=",
+			"path": "whacos/pkg/app",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "Tgp3e4HC3YSK34LMU5lTVfOToEg=",
+			"path": "whacos/pkg/e",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "g6o1Vh1yjbyYO3UMcRfIwTeM1gE=",
+			"path": "whacos/pkg/logging",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "Su/tL+D+Y0CXCDZhnaEk5yRhVto=",
+			"path": "whacos/pkg/settings",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "ll9wVJbki7kSHc3wThzgpHbCjS0=",
+			"path": "whacos/pkg/utils",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "bO4Hyg/VnGjRs3c9utRi4ECp0XU=",
+			"path": "whacos/routers",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "7dGICFft5ZZwMT7HK30K7s/ecO8=",
+			"path": "whacos/service",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "yfL2Q3SufOD1oDbMfjoYrE/9maY=",
+			"path": "whacos/service/s_dict",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "J9s3whXhfkwdJb0Iskqq0U9fI/g=",
+			"path": "whacos/service/s_file",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "lI1wflw7Br+9mShk6dKSqLoa7fw=",
+			"path": "whacos/service/s_log",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "Ok9VXHgOkkIKfTDTgcG4sQRf4Qg=",
+			"path": "whacos/service/s_menu",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "G55Y/razDjO7nZ+oUIBh0kMnjJg=",
+			"path": "whacos/service/s_role",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "eco6HGSzd6DSEcubAaoVrRqH+VE=",
+			"path": "whacos/service/s_task",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "OERo0hXL5UfK/172/7B24umhy+M=",
+			"path": "whacos/service/s_user",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
+		},
+		{
+			"checksumSHA1": "F5QP3iKWGuY4sP2bh0WHRHU/V1E=",
+			"path": "whacos/test",
+			"revision": "444f500f2404a438107690956ce728faffcde6c1",
+			"revisionTime": "2019-09-19T08:25:54Z"
 		}
 	],
 	"rootPath": "whacos"
