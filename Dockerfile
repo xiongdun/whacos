@@ -24,10 +24,10 @@ MAINTAINER xiongdun "1274328268@qq.com"
 #RUN go get github.com/xiongdun/whacos
 WORKDIR $GOPATH/src/github.com/xiongdun/whacos
 COPY . $GOPATH/src/github.com/xiongdun/whacos
-RUN go build .
+#RUN go build .
 
 EXPOSE 8090
-ENTRYPOINT ["./whacos"]
+ENTRYPOINT ["./main"]
 
 # Set the entry point of the container to the application executable
 #ENTRYPOINT ["./main"]
