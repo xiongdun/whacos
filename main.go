@@ -17,7 +17,7 @@ import (
 // @contact.email support@swagger.io
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host 127.0.0.1:8090
+// @host 148.70.20.37:8090
 // @BasePath /
 func main() {
 

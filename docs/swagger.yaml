@@ -92,7 +92,7 @@ definitions:
       username:
         type: string
     type: object
-host: 127.0.0.1:8090
+host: 148.70.20.37:8090
 info:
   contact:
     email: support@swagger.io
