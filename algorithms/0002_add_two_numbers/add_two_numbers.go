@@ -93,6 +93,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		if l2 == nil {
 			y = 0
 		} else {
+			//
 			y = l2.Value
 		}
 
