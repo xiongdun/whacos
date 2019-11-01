@@ -20,7 +20,7 @@ func main() {
 	fmt.Println("====================================")
 	f("direct")
 
-	//go f("goroutine")
+	//go f("02goroutine")
 	//
 	//go func(msg string) {
 	//	fmt.Println(msg)
