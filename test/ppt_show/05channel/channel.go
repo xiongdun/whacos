@@ -2,46 +2,23 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
-	intChan := make(chan int, 10)
-	stringChan := make(chan string)
-	//bootChan := make(chan bool)
+	ch := make(chan int, 3)
 
-	go channel1(intChan)
-	go channel2(stringChan)
-	//time.Sleep(time.Second * 6)
+	go printNumber(1, 3, ch)
+	go printNumber(4, 6, ch)
 
-	for value := range intChan {
-
-		fmt.Println("int channel`s value is ", value)
-
-		//value1, ok1 := <-stringChan
-		//if ok1 {
-		//	fmt.Println("string channel`s value is ", value1)
-		//}
-	}
-
-	//value1, ok1 := <-stringChan
-	//if ok1 {
-	//	fmt.Println("string channel`s value is ", value1)
-	//}
-	fmt.Println(<-stringChan)
-	//<-intChan
-
+	_ = <-ch
+	_ = <-ch
 }
 
-func channel1(ch chan int) {
-	for i := 0; i < 10; i++ {
-		value := i + 1
-
-		ch <- value
+func printNumber(from, to int, ch chan int) {
+	for i := from; i < to; i++ {
+		fmt.Printf("%d\n", i)
+		time.Sleep(1 * time.Second)
 	}
-	close(ch) // 使用完channel 一定要记得close
-}
-
-func channel2(ch chan string) {
-	ch <- "my name is xiongdun"
-	close(ch)
+	ch <- 0
 }

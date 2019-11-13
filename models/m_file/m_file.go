@@ -1,6 +1,7 @@
 package m_file
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 	"whacos/models"
 )
@@ -20,6 +21,8 @@ func (f *File) SelectById(id int) (*File, error) {
 	if err := models.DB.Model(&file).Where("id = ? and del_flag = 1", id).Find(&file).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
+
+	fmt.Println()
 	return &file, nil
 }
 

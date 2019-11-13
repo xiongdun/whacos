@@ -6,6 +6,8 @@ func main() {
 	// 无返回值协程
 	go printHello()
 
+	//printHello()
+
 	// 有返回值协程，但无法接收
 	go returnValue()
 
