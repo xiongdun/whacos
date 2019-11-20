@@ -85,6 +85,9 @@ func SetString(key string, value ...string) (reply string, err error) {
 		logging.Info("set key-value to redis error , this error reason is ", err, err.Error())
 		return
 	}
+
+	conn.Do()
+
 	return reply, nil
 }
 
