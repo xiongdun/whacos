@@ -1,11 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func AlwaysFalse() bool {
+	return false
+}
 
 func main() {
-	fmt.Println(fiboracci(3))
 
-	fmt.Println(fibTail(3))
+	count := 0
+
+	for i := range [256]struct{}{} {
+		m, n := byte(i), int8(i)
+
+		if n == -n {
+			count++
+		}
+
+		if m == -m {
+			count++
+		}
+	}
+	fmt.Println(count)
+
+	fmt.Println(fiboracci(3),
+		fibTail(23),
+		fibTail(23), fibTail(23), fibTail(23), fibTail(23), 1+fibTail(23), fibTail(23), fibTail(23), fibTail(23), fibTail(23), fibTail(23))
+
+	in := fibTail(23) + fibTail(23) +
+		fibTail(23) + fibTail(23) + fibTail(23)
+
+	fmt.Println(fibTail(3), in)
 
 	fmt.Printf("%T", zero)
 }

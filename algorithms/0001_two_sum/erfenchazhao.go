@@ -13,8 +13,6 @@ func main() {
 
 	fs := math.Log2(1000000000000)
 	fmt.Println(fs)
-
-	math.Pow()
 }
 
 func search(nums []int, item int) int {
